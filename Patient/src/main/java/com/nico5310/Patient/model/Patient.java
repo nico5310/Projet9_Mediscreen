@@ -45,21 +45,21 @@ public class Patient {
     /**
      * Sex / genre patient
      */
-    @NotBlank(message = "Sex cannot be blank")
+    @NotNull(message = "Sex cannot be blank")
     @Column(name = "sex")
     private char sex;
 
     /**
      * Address patient
      */
-    @NotBlank(message = "Address cannot be blank")
+
     @Column(name = "address")
     private String address;
 
     /**
      * phone number patient
      */
-    @NotBlank(message = "Phone cannot be blank")
+
     @Column(name = "phone")
     private String phone;
 

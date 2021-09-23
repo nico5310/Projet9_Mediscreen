@@ -39,7 +39,6 @@ public class PatientController {
         return patientService.getById(id);
     }
 
-
     @ApiOperation(value = "Saving new patient")
     @PostMapping("/patient/add")
     public Patient addPatient(@RequestBody Patient patient) {
@@ -56,7 +55,6 @@ public class PatientController {
         logger.info("Show Update form page is charged");
         Patient patient = patientService.getById(id);
         model.addAttribute("patient", patient);
-
     }
 
     @ApiOperation(value = "Update patient")

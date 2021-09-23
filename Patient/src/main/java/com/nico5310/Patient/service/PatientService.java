@@ -13,8 +13,6 @@ public interface PatientService {
 
     Patient getById(int id);
 
-//    void addForm(Patient patient, Model model);
-
     Patient addPatient(Patient patient);
 
     Patient showUpdateForm(Integer id, Model model);

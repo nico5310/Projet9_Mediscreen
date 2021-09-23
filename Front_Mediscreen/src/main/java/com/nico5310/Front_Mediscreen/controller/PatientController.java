@@ -59,7 +59,7 @@ public class PatientController {
 
         logger.info("Show Update form page by Id" + id);
         patientMSProxy.showUpdateForm(id);
-        model.addAttribute("patient", patient);
+        model.addAttribute("patient", patientMSProxy.getById(id));
         return "patient/updatePatient"; // template html
     }
 

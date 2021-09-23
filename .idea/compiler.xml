@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="Front_Mediscreen" target="11" />
+      <module name="Front_Mediscreen.main" target="11" />
+      <module name="Front_Mediscreen.test" target="11" />
+      <module name="Patient" target="11" />
+      <module name="Patient.main" target="11" />
+      <module name="Patient.test" target="11" />
+      <module name="patientMS" target="11" />
+      <module name="patientMS.main" target="11" />
+      <module name="patientMS.test" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
