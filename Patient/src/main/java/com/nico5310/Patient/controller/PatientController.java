@@ -6,9 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,41 +26,37 @@ public class PatientController {
     @ApiOperation(value = "Get all patients")
     @RequestMapping("/patient/list")
     public List<Patient> listPatient() {
-        logger.info("Get list patient");
+
+        logger.info("Get list patient from DB");
         return patientService.listPatient();
     }
 
     @ApiOperation(value = "Get patient by id")
     @GetMapping("/patient/getById")
     public Patient getById(@RequestParam Integer id) {
-        logger.info("Get patient by Id");
+
+        logger.info("Get patient by Id from DB");
         return patientService.getById(id);
     }
 
-    /////////   ADD REQUEST
-//    @ApiOperation(value = "Show Add form")
-//    @GetMapping("/patient/addForm")
-//    public String addForm(Patient patient, Model model) {
-//        logger.info("Show patient add Form");
-//        patientService.addForm(patient, model);
-//        return "addPatient"; // template html
-//
-//    }
+
     @ApiOperation(value = "Saving new patient")
     @PostMapping("/patient/add")
     public Patient addPatient(@RequestBody Patient patient) {
 
-        logger.info("SUCCESS, add new Patient is complete");
+        logger.info("SUCCESS, add new Patient" + patient + " is complete to DB");
         return patientService.addPatient(patient);
     }
 
     ///////////    UPDATE REQUEST
     @ApiOperation(value = "Show Update patient form")
-    @GetMapping("/patient/updateForm/{id}")
-    public void updateForm(@PathVariable("id") Integer id, Model model) {
+    @GetMapping("/patient/showUpdateForm/{id}")
+    public void showUpdateForm(@PathVariable("id") Integer id,Model model) {
 
-        logger.info("Show Update form");
-        patientService.updateForm(id, model);
+        logger.info("Show Update form page is charged");
+        Patient patient = patientService.getById(id);
+        model.addAttribute("patient", patient);
+
     }
 
     @ApiOperation(value = "Update patient")
@@ -78,7 +72,7 @@ public class PatientController {
     @GetMapping("/patient/delete/{id}")
     public void deletePatient(@PathVariable ("id") Integer id) {
 
-        logger.info("SUCCESS, Patient is correctly delete");
+        logger.info("SUCCESS, Patient is correctly delete to DB");
         patientService.deletePatient(id);
     }
 

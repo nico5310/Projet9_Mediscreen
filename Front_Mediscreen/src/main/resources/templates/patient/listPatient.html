@@ -46,7 +46,7 @@
 						<td th:text="${patient.phone }" ></td>
 
 						<td style="width: 15%" class="text-center">
-							<a class="btn btn-primary"  th:href="@{/patient/updateForm/{id}(id=${patient.id})}">Edit
+							<a class="btn btn-primary"  th:href="@{/patient/showUpdateForm/{id}(id=${patient.id})}">Edit
 							</a>&nbsp;|<!-- url controller-->
 							<a class="btn btn-warning" th:href="@{/patient/delete/{id}(id=${patient.id})}">Delete</a><!-- url controller -->
 						</td>

@@ -26,8 +26,8 @@ public interface PatientMSProxy {
     PatientBean addPatient( PatientBean patient);
 
     // Update
-    @GetMapping("/patient/updateForm/{id}")
-    void updateForm(@PathVariable("id") Integer id);
+    @GetMapping("/patient/showUpdateForm/{id}")
+    PatientBean showUpdateForm(@PathVariable("id") Integer id);
 
     @PostMapping(value = "/patient/update/{id}")
     PatientBean updatePatient(@PathVariable("id") Integer id, @Valid PatientBean patient);

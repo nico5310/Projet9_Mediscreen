@@ -4,6 +4,7 @@ import com.nico5310.Patient.model.Patient;
 import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PatientService {
 
@@ -16,7 +17,7 @@ public interface PatientService {
 
     Patient addPatient(Patient patient);
 
-    void updateForm(Integer id, Model model);
+    Patient showUpdateForm(Integer id, Model model);
 
     Patient updatePatient(Integer id, Patient patient);
 

@@ -62,10 +62,10 @@ public class PatientController {
 
     ///////////    UPDATE REQUEST
     @ApiOperation(value = "Show Update patient form")
-    @GetMapping("/patient/updateForm/{id}")
-    public String updateForm(@PathVariable("id") Integer id, PatientBean patient, Model model) {
+    @GetMapping("/patient/showUpdateForm/{id}")
+    public String showUpdateForm(@PathVariable("id") Integer id, PatientBean patient, Model model) {
         logger.info("Show Update form page by Id" + id);
-//        patientMSProxy.updateForm(id);
+        patientMSProxy.showUpdateForm(id);
         model.addAttribute("patient", patient);
         return "patient/updatePatient"; // template html
     }

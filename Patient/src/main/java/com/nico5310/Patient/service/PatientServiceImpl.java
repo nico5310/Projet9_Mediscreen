@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 
 import java.util.List;
 
+
 @Service
 public class PatientServiceImpl implements PatientService{
 
@@ -28,16 +29,11 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     public Patient getById(int id) {
-        logger.info("Get patient by id");
+        logger.info("Get patient by id " + id);
         return patientRepository.getById(id);
     }
 
     ////////     ADD METHOD
-//        @Override
-//    public String addForm(Patient patient, Model model) {
-//        model.addAttribute("addPatient", patient);// template html
-//        return "addPatient"; // template html
-//    }
 
     @Override
     public Patient addPatient(Patient patient) {
@@ -49,12 +45,14 @@ public class PatientServiceImpl implements PatientService{
     ///////  UPDATE METHOD
 
     @Override
-    public void updateForm(Integer id, Model model) {
+    public Patient showUpdateForm(Integer id, Model model) {
 
         logger.info("Show Update form complete");
-        Patient patient = patientRepository.findById(id).orElseThrow(() ->new IllegalArgumentException("Invalid ID:" + id));
+        Patient patient = patientRepository.getById(id);
         model.addAttribute("patient", patient);
+        return patient;
     }
+
 
     @Override
     public Patient updatePatient(Integer id, Patient patient) {
