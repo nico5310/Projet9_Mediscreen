@@ -1,6 +1,6 @@
-package com.nico5310.Patient.model;
+package com.nico5310.Front_Mediscreen.beans;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -8,14 +8,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Entity
-@Table(name = "patient")
-public class Patient {
+public class PatientBean {
 
-    /**
-     * ID patient auto-generated
-     */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id")
@@ -63,18 +58,8 @@ public class Patient {
     @Column(name = "phone")
     private String phone;
 
+    public PatientBean(Integer id, String family, String given, LocalDate dob, char sex, String address, String phone) {
 
-    /**
-     * Patient public constructor
-     * @param id of patient
-     * @param family of patient
-     * @param given of patient
-     * @param dob of patient
-     * @param sex of patient
-     * @param address of patient
-     * @param phone of patient
-     */
-    public Patient(Integer id,String family, String given, LocalDate dob, char sex, String address, String phone) {
         this.id      = id;
         this.family  = family;
         this.given   = given;
@@ -84,13 +69,9 @@ public class Patient {
         this.phone   = phone;
     }
 
-    /**
-     * Patient public empty constructor
-     */
-    public Patient() {
+    public PatientBean() {
 
     }
-
 
     public Integer getId() {
 
@@ -107,9 +88,9 @@ public class Patient {
         return family;
     }
 
-    public void setFamily(String firstName) {
+    public void setFamily(String family) {
 
-        this.family = firstName;
+        this.family = family;
     }
 
     public String getGiven() {
@@ -117,9 +98,9 @@ public class Patient {
         return given;
     }
 
-    public void setGiven(String lastName) {
+    public void setGiven(String given) {
 
-        this.given = lastName;
+        this.given = given;
     }
 
     public LocalDate getDob() {
@@ -160,11 +141,5 @@ public class Patient {
     public void setPhone(String phone) {
 
         this.phone = phone;
-    }
-
-    @Override
-    public String toString() {
-
-        return "Patient{" + "id=" + id + ", family='" + family + '\'' + ", given='" + given + '\'' + ", dob=" + dob + ", sex='" + sex + '\'' + ", address='" + address + '\'' + ", phone='" + phone + '\'' + '}';
     }
 }
