@@ -8,7 +8,7 @@ CREATE TABLE patient
     family        VARCHAR(44)        NOT NULL,
     given         VARCHAR(45)        NOT NULL,
     date_of_birth VARCHAR(10)        NOT NULL,
-    sex           VARCHAR(10)         NOT NULL,
+    sex           CHAR(6)            NOT NULL,
     address       VARCHAR(100)       NOT NULL,
     phone         VARCHAR(12)        NOT NULL,
     PRIMARY KEY (id)
