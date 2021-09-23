@@ -31,7 +31,7 @@ public class Patient {
     /**
      * Lastname patient
      */
-    @NotNull(message = "Last name is mandatory")
+    @NotBlank(message = "Last name is mandatory")
     @Column(name = "given")
     private String given;
 
@@ -45,21 +45,21 @@ public class Patient {
     /**
      * Sex / genre patient
      */
-    @NotNull(message = "Sex cannot be blank")
+    @NotBlank(message = "Sex cannot be blank")
     @Column(name = "sex")
     private char sex;
 
     /**
      * Address patient
      */
-    @NotNull(message = "Address cannot be blank")
+    @NotBlank(message = "Address cannot be blank")
     @Column(name = "address")
     private String address;
 
     /**
      * phone number patient
      */
-    @NotNull(message = "Phone cannot be blank")
+    @NotBlank(message = "Phone cannot be blank")
     @Column(name = "phone")
     private String phone;
 

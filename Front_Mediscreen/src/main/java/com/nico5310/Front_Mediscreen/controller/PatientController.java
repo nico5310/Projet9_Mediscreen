@@ -29,14 +29,6 @@ public class PatientController {
     }
 
 
-//    @GetMapping("/patient/getById")
-//    public PatientBean getById(@RequestParam Integer id) {
-//        logger.info("Get patient by Id");
-//        return patientMSProxy.getById(id);
-//    }
-
-    /////////   ADD REQUEST FORMULAIRE
-
     @GetMapping("/patient/addForm")
     public String addForm(PatientBean patient, Model model) {
         logger.info("Show patient add Form");
@@ -54,7 +46,7 @@ public class PatientController {
             logger.error("ERROR, Add new Patient isn't possible");
             return "patient/addPatient"; // template html
         }else {
-            logger.info("SUCCESS, add new Patient is complete");
+            logger.info("SUCCESS, add new Patient" + patient + " is complete");
             patientMSProxy.addPatient(patient);
             return "redirect:/patient/list"; // controller url
         }
@@ -64,6 +56,7 @@ public class PatientController {
     @ApiOperation(value = "Show Update patient form")
     @GetMapping("/patient/showUpdateForm/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, PatientBean patient, Model model) {
+
         logger.info("Show Update form page by Id" + id);
         patientMSProxy.showUpdateForm(id);
         model.addAttribute("patient", patient);
@@ -73,9 +66,10 @@ public class PatientController {
     @ApiOperation(value = "Update patient")
     @PostMapping("/patient/update/{id}")
     public String updatePatient(@PathVariable ("id") Integer id,@Valid PatientBean patient, BindingResult result, Model model) {
+
         model.addAttribute("patient", patient);
         if (result.hasErrors()) {
-            logger.error("ERROR, Update user ins't valid");
+            logger.error("ERROR, Update user isn't valid");
             patient.setId(id);
             return "patient/updatePatient"; // template html
         }else {
@@ -90,6 +84,7 @@ public class PatientController {
     @ApiOperation(value = "Delete patient")
     @GetMapping("/patient/delete/{id}")
     public String deletePatient(@PathVariable Integer id) {
+
         logger.info("SUCCESS, Patient is correctly delete");
         patientMSProxy.deletePatient(id);
         return "redirect:/patient/list "; // controller url

@@ -13,49 +13,41 @@ public class PatientBean {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
     private Integer id;
 
     /**
      * Firstname patient
      */
-    @Column(name = "family")
     @NotBlank(message = "First name is mandatory")
     private String family;
 
     /**
      * Lastname patient
      */
-    @NotNull(message = "Last name is mandatory")
-    @Column(name = "given")
+    @NotBlank(message = "Last name is mandatory")
     private String given;
 
     /**
      * Birthdate patient
      */
     @DateTimeFormat ( pattern = "yyyy-MM-dd")
-    @Column(name = "date_of_birth")
+    @NotNull(message = "Choice Birthdate")
     private LocalDate dob;
 
     /**
      * Sex / genre patient
      */
-    @NotNull(message = "Sex cannot be blank")
-    @Column(name = "sex")
+    @NotNull(message = "Choice F or M sex")
     private char sex;
 
     /**
      * Address patient
      */
-    @NotNull(message = "Address cannot be blank")
-    @Column(name = "address")
     private String address;
 
     /**
      * phone number patient
      */
-    @NotNull(message = "Phone cannot be blank")
-    @Column(name = "phone")
     private String phone;
 
     public PatientBean(Integer id, String family, String given, LocalDate dob, char sex, String address, String phone) {

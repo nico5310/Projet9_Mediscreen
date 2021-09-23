@@ -35,7 +35,8 @@
 					<input type="text" id="given" placeholder="Given" class="col-4"
 						   th:field="*{given}" >
 					<p class="text-danger" th:if="${#fields.hasErrors('given')}"
-					   th:errors="*{given}">Error Given</p>
+					   th:errors="*{given}">Error Given
+					</p>
 				</div>
 			</div>
 
@@ -45,7 +46,7 @@
 					<input type="date" id="dob" placeholder="Date of birth" class="col-4"
 						   th:field="*{dob}" th:text="${#dates.format(patient.dob, 'yyyy-MM-dd')}">
 					<p class="text-danger" th:if="${#fields.hasErrors('dob')}"
-					   th:errors="*{dob}">Error Date of birth
+					   th:errors="*{dob}">Choice a birthdate
 					</p>
 				</div>
 			</div>
@@ -55,7 +56,9 @@
 				<div class="col-sm-10">
 					<label class="checkbox-inline"><input type="radio" id="sex" th:field="*{sex}" th:value="F">F</label>
 					<label class="checkbox-inline"><input type="radio" th:field="*{sex}" th:value="M">M</label>
-					<p class="text-danger" th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}"></p>
+					<p class="text-danger" th:if="${#fields.hasErrors('sex')}"
+					   th:errors="*{sex}"> Choice a genre sex
+					</p>
 				</div>
 			</div>
 
@@ -64,9 +67,7 @@
 				<div class="col-sm-10">
 					<input type="text" id="address" placeholder="Address" class="col-4"
 						   th:field="*{address}" >
-					<p class="text-danger" th:if="${#fields.hasErrors('address')}"
-					   th:errors="*{address}">Error Address</p>
-				</div>
+				 </div>
 			</div>
 
 			<div class="form-group">
@@ -74,9 +75,7 @@
 				<div class="col-sm-10">
 					<input type="text" id="phone" placeholder="Phone" class="col-4"
 						   th:field="*{phone}" >
-					<p class="text-danger" th:if="${#fields.hasErrors('phone')}"
-					   th:errors="*{phone}">Error Phone</p>
-				</div>
+									</div>
 			</div>
 
 			<div class="form-group" style="margin-top: 20px">
