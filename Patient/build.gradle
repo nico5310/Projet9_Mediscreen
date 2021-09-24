@@ -1,7 +1,9 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.4'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'idea'
+	id 'org.springframework.boot' version '2.5.4'
+	id "io.spring.dependency-management" version "1.0.11.RELEASE"
+	id 'jacoco'
 }
 
 bootJar {
@@ -20,17 +22,46 @@ dependencies {
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.5.4'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.5.4'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.4'
-	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.25'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.5.4'
-
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.25'
 
 	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
 
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.2'
 	testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.5.4'
+	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.12.0'
 }
 
 test {
 	useJUnitPlatform()
+}
+
+jacoco {
+	toolVersion = "0.8.6"
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+		csv.enabled false
+		html.destination file("${buildDir}/jacocoHtml")
+	}
+
+}
+
+test.finalizedBy jacocoTestReport
+check.dependsOn jacocoTestCoverageVerification
+
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			limit {
+				counter = 'LINE'
+				value = 'COVEREDRATIO'
+				minimum = 0.5
+			}
+		}
+	}
 }
