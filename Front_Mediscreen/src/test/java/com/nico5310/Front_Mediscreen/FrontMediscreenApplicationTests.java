@@ -10,4 +10,9 @@ class FrontMediscreenApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	public void main() {
+		FrontMediscreenApplication.main(new String[] {});
+	}
+
 }
