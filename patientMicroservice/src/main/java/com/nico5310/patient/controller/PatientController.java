@@ -17,12 +17,12 @@ import java.util.List;
 @RestController
 public class PatientController {
 
-    private final Logger logger = LoggerFactory.getLogger(PatientController.class);
+    private static final Logger logger = LoggerFactory.getLogger(PatientController.class);
 
     @Autowired
     private PatientService patientService;
 
-    ////////  GET REQUEST
+    ////////  GET REQUEST   ////////////
     @ApiOperation(value = "Get all patients")
     @RequestMapping("/patient/list")
     public List<Patient> listPatient() {
@@ -39,6 +39,7 @@ public class PatientController {
         return patientService.getById(id);
     }
 
+    ////////////  ADD REQUEST /////////////
     @ApiOperation(value = "Saving new patient")
     @PostMapping("/patient/add")
     public Patient addPatient(@RequestBody Patient patient) {
@@ -47,7 +48,7 @@ public class PatientController {
         return patientService.addPatient(patient);
     }
 
-    ///////////    UPDATE REQUEST
+    ///////////    UPDATE REQUEST  ///////////////
     @ApiOperation(value = "Show Update patient form")
     @GetMapping("/patient/showUpdateForm/{id}")
     public void showUpdateForm(@PathVariable("id") Integer id,Model model) {

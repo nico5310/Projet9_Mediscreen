@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class PatientServiceImpl implements PatientService{
 
-    private final Logger logger = LoggerFactory.getLogger(PatientService.class);
+    private static final Logger logger = LoggerFactory.getLogger(PatientService.class);
 
     @Autowired
     private PatientRepository patientRepository;
