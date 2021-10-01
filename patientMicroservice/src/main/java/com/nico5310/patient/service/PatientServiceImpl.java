@@ -67,7 +67,7 @@ public class PatientServiceImpl implements PatientService{
     public void deletePatient(Integer id) {
 
         logger.info("Delete patient is complete");
-        Patient patient =patientRepository.findById(id).orElseThrow(() ->new IllegalArgumentException("Invalid ID:" + id));
+        Patient patient = patientRepository.findById(id).orElseThrow(() ->new IllegalArgumentException("Invalid ID:" + id));
         patientRepository.delete(patient);
     }
 

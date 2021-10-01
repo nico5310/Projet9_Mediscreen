@@ -23,15 +23,15 @@ public class NoteController {
 
     ///////////   GET REQUEST //////////////
     @ApiOperation(value = "Get all notes")
-    @GetMapping("/notes/list")
-    public List<Note> listNote(@RequestParam Integer patientId) {
+    @GetMapping("/note/list/{patientId}")
+    public List<Note> listNote(@PathVariable ("patientId") Integer patientId) {
 
         logger.info("Get list notes from DB for :" + patientId);
         return noteService.findAllNotesByPatientId(patientId);
     }
 
     @ApiOperation(value = "Get note by id")
-    @GetMapping("/notes/getNoteById/{id}")
+    @GetMapping("/note/getNoteById/{id}")
     public Note getNoteById(@RequestParam String id) {
 
         logger.info("Get note by Id from DB");
@@ -41,7 +41,7 @@ public class NoteController {
 
     //////////  ADD REQUEST   ///////////////
     @ApiOperation(value = "Saving new note")
-    @PostMapping("/notes/add")
+    @PostMapping("/note/add")
     public Note addNote(@RequestBody Note note) {
 
         logger.info("SUCCESS, add new note" + note + " is complete to DB");
@@ -50,11 +50,20 @@ public class NoteController {
 
     /////////  UPDATE REQUEST  ///////////////
     @ApiOperation(value = "Update note")
-    @PostMapping("/notes/update/{id}")
+    @PostMapping("/note/update/{id}")
     public Note updatePatient(@PathVariable ("id") String id, @RequestBody @Valid Note note) {
 
         logger.info("SUCCESS, Update note is complete");
         return noteService.updateNote(id, note);
+    }
+
+    //////// DELETE REQUEST ///////////////
+    @ApiOperation(value = "Delete note")
+    @GetMapping("/note/delete/{id}")
+    public void deleteNote(@PathVariable ("id") String id) {
+
+        logger.info("SUCCESS, note is correctly delete to DB");
+        noteService.deleteNoteById(id);
     }
 
 }

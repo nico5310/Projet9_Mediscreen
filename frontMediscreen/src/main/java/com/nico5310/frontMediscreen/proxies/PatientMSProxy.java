@@ -21,8 +21,6 @@ public interface PatientMSProxy {
     PatientBean getById(@RequestParam Integer id);
 
     // ADD
-//    @GetMapping("/patient/addForm")
-//    String addForm(PatientBean patient, Model model);
 
     @PostMapping(value = "/patient/add")
     PatientBean addPatient( PatientBean patient);

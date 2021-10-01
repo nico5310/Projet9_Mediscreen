@@ -31,6 +31,7 @@ public class PatientController {
         return "patient/listPatient"; // template html
     }
 
+    ////////   ADD REQUEST SAVE PATIENT
 
     @GetMapping("/patient/addForm")
     public String addForm(PatientBean patient, Model model) {
@@ -40,7 +41,7 @@ public class PatientController {
 
     }
 
-    ////////   ADD REQUEST SAVE PATIENT
+
     @ApiOperation(value = "Saving new patient")
     @PostMapping("/patient/add")
     public String addPatient( @Valid @ModelAttribute("patient") PatientBean patient, BindingResult result) {

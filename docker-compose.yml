@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+    mongodb:
+        image: mongo:latest
+        container_name: note_mediscreen_mongodb
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: nico
+        ports:
+            -   27017:27017
+        volumes:
+            -   mongodb_data:/data/db
+
+    mysql:
+        image: mysql
+        container_name: patient_mediscreen_sql
+        environment:
+            MYSQL_ROOT_USERNAME: root
+            MYSQL_ROOT_PASSWORD: nico5310
+        ports:
+            -   6033:3306
+        volumes:
+            -   mysql_data:/data/db
+
+volumes:
+    mongodb_data:
+    mysql_data:
+
+

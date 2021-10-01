@@ -1,0 +1,51 @@
+[{
+  "_id": {
+    "$oid": "6156b1b6b8abf702c482f71a"
+  },
+  "patientId": 1,
+  "date": {
+    "$date": "2021-09-29T22:00:00Z"
+  },
+  "recommendation": "test2",
+  "_class": "com.nico5310.noteMicroservice.model.Note"
+},{
+  "_id": {
+    "$oid": "6156b228b8abf702c482f71b"
+  },
+  "patientId": 1,
+  "date": {
+    "$date": "2021-09-29T22:00:00Z"
+  },
+  "recommendation": "test2",
+  "_class": "com.nico5310.noteMicroservice.model.Note"
+},{
+  "_id": {
+    "$oid": "6156bd839da70d594baed18c"
+  },
+  "patientId": 2,
+  "date": {
+    "$date": "2021-09-29T22:00:00Z"
+  },
+  "recommendation": "test4",
+  "_class": "com.nico5310.noteMicroservice.model.Note"
+},{
+  "_id": {
+    "$oid": "6156bd889da70d594baed18d"
+  },
+  "patientId": 2,
+  "date": {
+    "$date": "2021-09-29T22:00:00Z"
+  },
+  "recommendation": "test6",
+  "_class": "com.nico5310.noteMicroservice.model.Note"
+},{
+  "_id": {
+    "$oid": "615700028cbb2e4993bbcbe0"
+  },
+  "patientId": 2,
+  "date": {
+    "$date": "2021-09-29T22:00:00Z"
+  },
+  "recommendation": "test6",
+  "_class": "com.nico5310.noteMicroservice.model.Note"
+}]

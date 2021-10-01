@@ -55,7 +55,4 @@ public class NoteServiceImpl implements NoteService{
         noteRepository.deleteById(id);
     }
 
-
-
-
 }
