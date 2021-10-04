@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
@@ -30,7 +29,7 @@ public class Note {
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @DateTimeFormat( pattern = "yyyy-MM-dd")
-    @NotNull(message = "Date is mandatory")
+//    @NotNull(message = "Date is mandatory")
     private LocalDate date;
 
     @Field (value = "recommendation")

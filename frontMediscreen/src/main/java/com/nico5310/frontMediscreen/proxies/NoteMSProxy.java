@@ -4,27 +4,34 @@ import com.nico5310.frontMediscreen.beans.NoteBean;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.util.List;
 
 @FeignClient(name = "note-microservice", url = "${note.url}")
 public interface NoteMSProxy {
 
+    /// GET
     @GetMapping("/note/list/{patientId}")
-    String listNote(@PathVariable("patientId") Integer patientId);
+    List<NoteBean> listNote(@PathVariable("patientId") Integer patientId);
 
     @GetMapping("/note/getNoteById/{id}")
-    NoteBean getNoteById(@RequestParam String id);
+    NoteBean getNoteById(@PathVariable ("id") String id);
 
+
+    /// ADD
     @PostMapping("/note/add")
     NoteBean addNote(@RequestBody NoteBean note);
 
+
+    /// UPDATE
     @GetMapping("/note/showUpdateForm/{id}")
-    NoteBean showUpdateForm(@PathVariable("id") String id);
+    NoteBean showUpdateNoteForm(@PathVariable("id") String id);
 
     @PostMapping("/note/update/{id}")
-    NoteBean updateNote(@PathVariable("id") String id, @RequestBody @Valid NoteBean note);
+    NoteBean updateNote(@PathVariable ("id") String id, @RequestBody NoteBean note);
 
+    /// DELETE
     @GetMapping("/note/delete/{id}")
     void deleteNote(@PathVariable ("id") String id);
+
 
 }

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -17,14 +18,14 @@ public class NoteServiceImpl implements NoteService{
     @Autowired
     private NoteRepository noteRepository;
 
+    ///////  GET METHOD
 
     @Override
-    public List<Note> findAllNotesByPatientId(Integer patientId) {
+    public List<Note> findByPatientId(Integer patientId) {
 
         logger.info("Get all notes of patient by id : " + patientId);
-        return noteRepository.findByPatientId(patientId);
+        return noteRepository.findAllNotesByPatientId(patientId);
     }
-
 
     @Override
     public Note getNoteById(String id) {
@@ -33,11 +34,24 @@ public class NoteServiceImpl implements NoteService{
         return noteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No found note for this id :" + id));
     }
 
+    ///////  ADD METHOD
+
     @Override
     public Note addNote(Note note) {
 
         logger.info("Saving new note to patient");
         return noteRepository.save(note);
+    }
+
+    ///////  UPDATE METHOD
+
+    @Override
+    public Note showUpdateNoteForm(String id, Model model) {
+
+        logger.info("Show Update form complete");
+        Note note = noteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ID:" + id));
+        model.addAttribute("note", note);
+        return note;
     }
 
     @Override
@@ -47,12 +61,14 @@ public class NoteServiceImpl implements NoteService{
         return noteRepository.save(note);
     }
 
+    /////// DELETE METHOD
+
     @Override
     public void deleteNoteById(String id) {
 
         logger.info("Delete note is complete");
         Note note = noteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ID:" + id));
-        noteRepository.deleteById(id);
+        noteRepository.delete(note);
     }
 
 }

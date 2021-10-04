@@ -11,14 +11,19 @@
 <body>
 	<div class="container h-100">
 
-		<div class="row"><h2>Note List</h2></div>
+		<div class="row" style="margin-top: 20px">
+			<h2>Note List for :
+				 <span class="text-secondary fw-light" th:text="${patientName}"></span>
+			</h2>
+		</div>
+
 		<div class="row justify-content_center">
 			<div class="col-12">
-				<a href="/note/addForm" class="btn btn-primary btn-sm" style="margin-bottom: 10px">Add New Note</a>
+				<a class="btn btn-primary btn-sm" th:href="@{/note/addForm/{patientId}(patientId=${patient.id})}"
+				   style="margin-bottom: 10px">Add New Note</a>
 				<!-- controller url-->
-
-
 			</div>
+
 			<table class="table table-bordered table-striped table-hover text-center" style="margin-top: 10px">
 				<thead>
 					<tr>
@@ -30,15 +35,19 @@
 				</thead>
 				<tbody>
 					<tr th:each="note : ${notes}">
-						<td th:text="${note.id}"></td>
-						<td th:text="${note.date}" ></td>
+						<td th:text="${note.id}" style="width: 20%"></td>
+<!--						<td th:text="${note.patientId}"></td>-->
+						<td th:text="${note.date}" style="width: 15%" ></td>
 						<td th:text="${note.recommendation}" ></td>
 
 
 						<td style="width: 15%" class="text-center">
-							<a class="btn btn-primary"  th:href="@{/note/showUpdateForm/{id}(id=${note.id})}">Edit
+							<a class="btn btn-primary"
+							   th:href="@{/note/showUpdateForm/{id}/{patientId} (id=*{note.id},patientId=*{note.patientId})}">Edit
 							</a>&nbsp;|<!-- url controller-->
-							<a class="btn btn-danger btn-sm" th:href="@{/note/delete/{id}(id=${note.id})}">Delete</a><!--
+							<a class="btn btn-danger btn-sm"
+							   th:href="@{/note/delete/{id}(id=${note.id})}">Delete
+							</a><!--
 							 url controller -->
 						</td>
 

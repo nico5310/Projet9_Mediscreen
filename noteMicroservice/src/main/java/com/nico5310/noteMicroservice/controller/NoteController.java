@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class NoteController {
     public List<Note> listNote(@PathVariable ("patientId") Integer patientId) {
 
         logger.info("Get list notes from DB for :" + patientId);
-        return noteService.findAllNotesByPatientId(patientId);
+        return noteService.findByPatientId(patientId);
     }
 
     @ApiOperation(value = "Get note by id")
@@ -49,11 +50,23 @@ public class NoteController {
     }
 
     /////////  UPDATE REQUEST  ///////////////
+
+    @ApiOperation(value = "Show Update note form")
+    @GetMapping("/note/showUpdateForm/{id}/{patientId}")
+    public void showUpdateNoteForm(@PathVariable("id") String id,Integer patientId, Model model) {
+
+        logger.info("Show Update form page is charged");
+        Note note = noteService.getNoteById(id);
+        model.addAttribute("note", note);
+    }
+
+
     @ApiOperation(value = "Update note")
     @PostMapping("/note/update/{id}")
-    public Note updatePatient(@PathVariable ("id") String id, @RequestBody @Valid Note note) {
+    public Note updateNote(@PathVariable ("id") String id, @RequestBody @Valid Note note) {
 
         logger.info("SUCCESS, Update note is complete");
+        note.setId(id);
         return noteService.updateNote(id, note);
     }
 
