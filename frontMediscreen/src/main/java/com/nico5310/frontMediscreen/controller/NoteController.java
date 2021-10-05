@@ -11,10 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -35,6 +39,7 @@ public class NoteController {
         List<NoteBean> noteBeanList = noteMSProxy.listNote(id);
         PatientBean patient = patientMSProxy.getById(id);
 
+        model.addAttribute("localDateTime", LocalDateTime.now());
         model.addAttribute("patientName", patient.getFamily() + " " + patient.getGiven());
         model.addAttribute("patient", patient);
         model.addAttribute("notes", noteBeanList);
@@ -46,8 +51,11 @@ public class NoteController {
     public String addForm(@PathVariable ("patientId") Integer patientId, NoteBean note, Model model) {
 
         logger.info("Show note add Form");
+        PatientBean patient = patientMSProxy.getById(patientId);
         note.setPatientId(patientId);
         note.setDate(LocalDate.now());
+
+        model.addAttribute("patientName", patient.getFamily() + " " + patient.getGiven());
         model.addAttribute("note", note);
         return "note/addNote.html";
 

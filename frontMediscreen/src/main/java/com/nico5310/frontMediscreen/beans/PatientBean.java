@@ -45,11 +45,13 @@ public class PatientBean {
     /**
      * Address patient
      */
+    @NotBlank(message = "address is mandatory")
     private String address;
 
     /**
      * phone number patient
      */
+    @NotBlank(message = "Phone is mandatory")
     private String phone;
 
     public PatientBean(Integer id, String family, String given, LocalDate dob, char sex, String address, String phone) {

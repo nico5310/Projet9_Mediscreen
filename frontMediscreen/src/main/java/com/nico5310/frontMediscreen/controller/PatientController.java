@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 @Controller
 public class PatientController {
@@ -27,6 +28,7 @@ public class PatientController {
     @GetMapping (value = "patient/list")
     public String listPatient(Model model) {
         logger.info("Get list patient from Proxy");
+        model.addAttribute("localDateTime", LocalDateTime.now());
         model.addAttribute("patients", patientMSProxy.listPatient());
         return "patient/listPatient"; // template html
     }

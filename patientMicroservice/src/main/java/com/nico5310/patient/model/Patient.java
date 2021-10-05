@@ -52,14 +52,14 @@ public class Patient {
     /**
      * Address patient
      */
-
+    @NotBlank(message = "address  is mandatory")
     @Column(name = "address")
     private String address;
 
     /**
      * phone number patient
      */
-
+    @NotBlank(message = "address  is mandatory")
     @Column(name = "phone")
     private String phone;
 
