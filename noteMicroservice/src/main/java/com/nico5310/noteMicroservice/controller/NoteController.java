@@ -7,13 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Validated
+
 @RestController
 public class NoteController {
 
@@ -32,7 +31,7 @@ public class NoteController {
     }
 
     @ApiOperation(value = "Get note by id")
-    @GetMapping("/note/getNoteById/{id}")
+    @GetMapping("/note/getNoteById")
     public Note getNoteById(@RequestParam String id) {
 
         logger.info("Get note by Id from DB");

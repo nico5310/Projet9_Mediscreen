@@ -1,22 +1,7 @@
 package com.nico5310.patient.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
 import com.nico5310.patient.model.Patient;
 import com.nico5310.patient.repositories.PatientRepository;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,10 +11,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.ui.ConcurrentModel;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
 @DisplayName("Test PatientService ")
 @ContextConfiguration(classes = {PatientServiceImpl.class})
 @ExtendWith(SpringExtension.class)
-class PatientServiceImplTest {
+class PatientServiceTest {
 
     @Autowired
     private PatientServiceImpl patientServiceImpl;
@@ -42,7 +34,7 @@ class PatientServiceImplTest {
 
     @Test
     @DisplayName(" Test list patient")
-    void testListPatient() {
+    void listPatientTest() {
         //GIVEN
         Patient       patient1    = new Patient(1, "Doe1", "John1", LocalDate.of(2000, 10, 10), 'M', "1 address", "100-200-4000");
         Patient       patient2    = new Patient(2, "Doe2", "John2", LocalDate.of(2010, 10, 10), 'M', "2 address", "200-200-4000");
@@ -92,7 +84,6 @@ class PatientServiceImplTest {
         patientService.showUpdateForm(1, new ConcurrentModel());
         //THEN
         verify(patientRepository).getById(1);
-
     }
 
     @Test

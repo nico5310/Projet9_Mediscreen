@@ -16,7 +16,6 @@ public interface NoteService  {
 
     Note addNote(Note note);
 
-
     Note showUpdateNoteForm(String id, Model model);
 
     Note updateNote(String id, Note note);
