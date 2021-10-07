@@ -17,11 +17,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.Matchers.hasSize;
-
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @DisplayName("Unit Test Controller patient")
@@ -74,6 +72,17 @@ public class PatientControllerTest {
                 .content("{ \"family\":\"Doe1\", \"given\":\"John1\", \"dob\":\"2020-10-10\", \"sex\":\"M\", \"address\":\"1 address\", \"phone\":\"100-222-1000\" }")
                 .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
     }
+
+    @Test
+    @DisplayName(" Test updateFormPatient")
+    public void updateFormPatientTest() throws Exception {
+
+        Patient       patient1    = new Patient(1, "Doe1", "John1", LocalDate.of(2000, 10, 10), 'M', "1 address", "100-200-4000");
+
+        mockMvc.perform(get("/patient/showUpdateForm/1")).andExpect(status().isOk());
+    }
+
+
 
     @Test
     @DisplayName(" Test updatePatient")

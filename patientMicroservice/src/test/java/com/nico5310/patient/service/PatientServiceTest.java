@@ -14,8 +14,10 @@ import org.springframework.ui.ConcurrentModel;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @DisplayName("Test PatientService ")
@@ -121,11 +123,24 @@ class PatientServiceTest {
         //GIVEN
         Patient patient1 = new Patient(1, "Doe1", "John1", LocalDate.of(2000, 10, 10), 'M', "1 address", "100-200-4000");
         //WHEN
-        patientRepository.delete(patient1);
+        when(patientRepository.save(patient1)).thenReturn(patient1);
+        when(patientRepository.findById(1)).thenReturn(Optional.of(patient1));
+        patientServiceImpl.deletePatient(1);
         //THEN
         verify(patientRepository).delete(patient1);
     }
 
+    @Test
+    @DisplayName(" Test delete patient Error")
+    public void deletePatientErrorTest() throws Exception {
+        //GIVEN
+        Patient patient1 = new Patient(1, "Doe1", "John1", LocalDate.of(2000, 10, 10), 'M', "1 address", "100-200-4000");
+        //WHEN
+        when(patientRepository.save(patient1)).thenReturn(patient1);
+        when(patientRepository.findById(1)).thenReturn(Optional.empty());
+        //THEN
+        assertThrows(IllegalArgumentException.class, () -> patientService.deletePatient(1));
+    }
 
 }
 

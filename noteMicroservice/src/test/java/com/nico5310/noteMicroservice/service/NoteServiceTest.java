@@ -10,6 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.ui.ConcurrentModel;
+import org.springframework.ui.Model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @DisplayName("Test NoteService ")
@@ -36,18 +38,18 @@ public class NoteServiceTest {
     @Test
     @DisplayName(" Test listPatient")
     public void getListPatientTest() throws Exception {
+        //GIVEN
         Note note1 = new Note("1", 1, LocalDate.now(), "azerty");
         Note note2 = new Note("2", 1, LocalDate.now(), "qsdfgh");
         Note note3 = new Note("2", 1, LocalDate.now(), "wxcvbn");
-
         List<Note> listNote = new ArrayList<Note>();
         listNote.add(note1);
         listNote.add(note2);
         listNote.add(note3);
-
+        //WHEN
         when(noteRepository.findAllNotesByPatientId(1)).thenReturn(listNote);
         noteService.findByPatientId(1);
-
+        //THEN
         verify(noteRepository, times(1)).findAllNotesByPatientId(1);
     }
 
@@ -61,6 +63,18 @@ public class NoteServiceTest {
         Note note2 = noteService.getNoteById("1");
         //THEN
         assertEquals(note1, note2);
+
+    }
+
+    @Test
+    @DisplayName(" Test getNoteByIdTest note Error")
+    public void getNoteByIdErrorTest() throws Exception {
+        //GIVEN
+        Note note1 = new Note("1", 1, LocalDate.now(), "azerty");
+        //WHEN
+        when(noteRepository.findById(any(String.class))).thenReturn(Optional.empty());
+        //THEN
+        assertThrows(IllegalArgumentException.class, () -> noteService.getNoteById("2"));
     }
 
     @Test
@@ -76,7 +90,7 @@ public class NoteServiceTest {
     }
 
     @Test
-    @DisplayName(" Test showUpdateForm")
+    @DisplayName(" Test showUpdateForm test")
     public void showUpdateFormTest() throws Exception {
         //GIVEN
         Note note1 = new Note("1", 1, LocalDate.now(), "azerty");
@@ -85,6 +99,19 @@ public class NoteServiceTest {
         noteService.showUpdateNoteForm("1", new ConcurrentModel());
         //THEN
         verify(noteRepository).findById("1");
+    }
+
+    @Test
+    @DisplayName(" Test showUpdateForm test Error")
+    public void showUpdateFormErrorTest() throws Exception {
+        //GIVEN
+        Note note1  = new Note("1", 1, LocalDate.now(), "azerty");
+        Model model = null;
+        //WHEN
+        when(noteRepository.findById("1")).thenReturn(Optional.empty());
+
+        //THEN
+        assertThrows(IllegalArgumentException.class, () -> noteService.showUpdateNoteForm("1",model));
     }
 
     @Test
@@ -109,13 +136,39 @@ public class NoteServiceTest {
     }
 
     @Test
-    @DisplayName(" Test delete note")
+    @DisplayName(" Test updateNote Error")
+    public void updateNoteErrorTest() throws Exception {
+        //THEN
+        //WHEN
+        when(noteRepository.findById(anyString())).thenReturn(Optional.empty());
+        //THEN
+        assertThrows(IllegalArgumentException.class, () -> noteService.getNoteById("1"));
+    }
+
+
+    @Test
+    @DisplayName(" Test delete note by Id")
     public void deleteNoteTest() throws Exception {
         //GIVEN
         Note note1 = new Note("1", 1, LocalDate.now(), "azerty");
         //WHEN
-        noteRepository.delete(note1);
+        when(noteRepository.save(note1)).thenReturn(note1);
+        when(noteRepository.findById("1")).thenReturn(Optional.of(note1));
+        noteServiceImpl.deleteNoteById("1");
         //THEN
         verify(noteRepository).delete(note1);
     }
+
+    @Test
+    @DisplayName(" Test delete note by Id Error")
+    public void deleteNoteErrorTest() throws Exception {
+        //GIVEN
+        Note note1 = new Note("2", 1, LocalDate.now(), "azerty");
+        //WHEN
+        when(noteRepository.save(note1)).thenReturn(note1);
+        when(noteRepository.findById("1")).thenReturn(Optional.empty());
+        //THEN
+        assertThrows(IllegalArgumentException.class, () -> noteService.deleteNoteById("2"));
+    }
+
 }

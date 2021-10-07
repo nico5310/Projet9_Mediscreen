@@ -29,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = NoteController.class)
 public class NoteControllerTest {
 
+
     @Autowired
     private NoteController noteController;
 
@@ -84,13 +85,14 @@ public class NoteControllerTest {
 
         when(noteService.getNoteById(any(String.class))).thenReturn(note1);
 
-        mockMvc.perform(get("/note/showUpdateForm/{id}/{patientId}", 1,1)
-                       .sessionAttr("note", note1)
-                       .param("id", "1")
-                       .param("patientId", "1")
-                       .param("recommendation", "azerty"))
+        mockMvc.perform(get("/note/showUpdateForm/{id}/{patientId}", 1, 1).sessionAttr("note", note1)
+                                                                          .param("id", "1")
+                                                                          .param("patientId", "1")
+                                                                          .param("recommendation", "azerty"))
                .andExpect(status().isOk());
     }
+
+
 
     @Test
     @DisplayName(" Test updateNote note")
@@ -101,11 +103,18 @@ public class NoteControllerTest {
         when(noteService.getNoteById(any(String.class))).thenReturn(note1);
         when(noteService.updateNote(any(String.class), any(Note.class))).thenReturn(note1);
 
-        mockMvc.perform(post("/note/update/{id}", 1)
-                       .contentType(MediaType.APPLICATION_JSON)
-                       .sessionAttr("note", note1)
-                       .content("{ \"id\":\"1\", \"patientId\":\"1\", \"date\":\"2020-10-10\", \"recommendation\":\"test\"}"))
+        mockMvc.perform(post("/note/update/{id}", 1).contentType(MediaType.APPLICATION_JSON).sessionAttr("note", note1).content("{ \"id\":\"1\", \"patientId\":\"1\", \"date\":\"2020-10-10\", \"recommendation\":\"test\"}"))
                .andExpect(status().isOk());
+
+    }
+
+    @Test
+    @DisplayName(" Test deleteNote")
+    public void deleteNoteTest() throws Exception {
+
+        Note note1 = new Note("1", 1, LocalDate.now(), "azerty");
+
+        mockMvc.perform(get("/note/delete/1")).andExpect(status().isOk());
 
     }
 
