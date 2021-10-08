@@ -1,4 +1,4 @@
-package com.nico5310.patient;
+package com.nico5310.assessmentMicroservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,12 +6,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
-public class PatientApplication {
+public class AssessmentMicroserviceApplication {
 
 	public static void main(String[] args) {
 
-		SpringApplication.run(PatientApplication.class, args);
+		SpringApplication.run(AssessmentMicroserviceApplication.class, args);
 	}
-
 
 }
