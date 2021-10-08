@@ -51,7 +51,7 @@ public class PatientControllerTest {
 
     @Test
     @DisplayName(" Test getAddPatient with valid param")
-    public void validateAddPatientWithValidParamTest() throws Exception {
+    public void add_Patient_With_Valid_ParamTest() throws Exception {
 
         PatientBean patient1 = new PatientBean();
         when(patientMSProxy.addPatient(any(PatientBean.class))).thenReturn(patient1);
@@ -70,7 +70,7 @@ public class PatientControllerTest {
 
     @Test
     @DisplayName(" Test getAddPatient with invalid param")
-    public void validateAddPatientWithInvalidParamTest() throws Exception {
+    public void not_Add_Patient_With_Invalid_ParamTest() throws Exception {
 
         PatientBean patient1 = new PatientBean();
         when(patientMSProxy.addPatient(any(PatientBean.class))).thenReturn(patient1);
@@ -99,7 +99,7 @@ public class PatientControllerTest {
 
     @Test
     @DisplayName(" Test updatePatient with valid param")
-    public void updatePatientWithValidParamTest() throws Exception {
+    public void update_Patient_With_Valid_ParamTest() throws Exception {
 
         PatientBean patient1 = new PatientBean();
         when(patientMSProxy.getById(anyInt())).thenReturn(patient1);
@@ -115,13 +115,11 @@ public class PatientControllerTest {
                .andExpect(status().is3xxRedirection())
                .andExpect(model().hasNoErrors())
                .andExpect(view().name("redirect:/patient/list"));
-
-
     }
 
     @Test
     @DisplayName(" Test updatePatient with invalid param")
-    public void updatePatientWithInvalidParamTest() throws Exception {
+    public void not_Update_Patient_With_Invalid_ParamTest() throws Exception {
 
         PatientBean patient1 = new PatientBean();
         when(patientMSProxy.getById(anyInt())).thenReturn(patient1);
