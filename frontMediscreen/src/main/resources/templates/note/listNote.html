@@ -16,6 +16,27 @@
 				 <span class="text-secondary fw-light" th:text="${patientName}"></span>
 			</h2>
 		</div>
+		<div class="s-flex-row" style="margin-top: 10px">
+			<h4>Age :
+				<span class="text-secondary fw-light" th:text="${patientAge}"></span>
+			</h4>
+		</div>
+		<div class="row" style="margin-top: 10px">
+			<h4>Genre :
+				<span class="text-secondary fw-light" th:text="${patientGenre}"></span>
+			</h4>
+		</div>
+		<div class="row" style="margin-top: 10px">
+			<h4>Triggers :
+				<span class="text-secondary fw-light" th:text="${triggers}"></span>
+			</h4>
+		</div>
+		<div class="row">
+			<h2>Patient level Risk :
+				<span class="text-secondary fw-light" th:text="${assessment}"></span>
+			</h2>
+		</div>
+
 
 		<div class="row" style="margin-top: 10px">
 			<p th:text="${#temporals.format(localDateTime, 'yyyy-MM-dd HH:mm')}"></p>

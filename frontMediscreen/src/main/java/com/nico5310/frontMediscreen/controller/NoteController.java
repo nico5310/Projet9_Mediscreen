@@ -2,6 +2,7 @@ package com.nico5310.frontMediscreen.controller;
 
 import com.nico5310.frontMediscreen.beans.NoteBean;
 import com.nico5310.frontMediscreen.beans.PatientBean;
+import com.nico5310.frontMediscreen.proxies.AssessmentMSProxy;
 import com.nico5310.frontMediscreen.proxies.NoteMSProxy;
 import com.nico5310.frontMediscreen.proxies.PatientMSProxy;
 import io.swagger.annotations.ApiOperation;
@@ -32,15 +33,26 @@ public class NoteController {
     @Autowired
     private PatientMSProxy patientMSProxy;
 
+    @Autowired
+    private AssessmentMSProxy assessmentMSProxy;
+
 
     @GetMapping(value = "/note/list/{id}")
     public String listNote(@PathVariable ("id") Integer id, Model model) {
         logger.info("Get list notes from Proxy");
+        PatientBean     patient    = patientMSProxy.getById(id);
+        int age = assessmentMSProxy.getAge(id);
+        int triggers = assessmentMSProxy.getTriggers(id);
+        String assessment = assessmentMSProxy.getDiabetesLevelRisk(id);
         List<NoteBean> noteBeanList = noteMSProxy.listNote(id);
-        PatientBean patient = patientMSProxy.getById(id);
 
-        model.addAttribute("localDateTime", LocalDateTime.now());
+
         model.addAttribute("patientName", patient.getFamily() + " " + patient.getGiven());
+        model.addAttribute("patientAge", age);
+        model.addAttribute("patientGenre", patient.getSex());
+        model.addAttribute("triggers", triggers );
+        model.addAttribute("localDateTime", LocalDateTime.now());
+        model.addAttribute ("assessment", assessment);
         model.addAttribute("patient", patient);
         model.addAttribute("notes", noteBeanList);
         return "note/listNote.html";
