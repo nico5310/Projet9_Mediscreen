@@ -96,7 +96,7 @@ public class NoteServiceTest {
         Note note1 = new Note("1", 1, LocalDate.now(), "azerty");
         //WHEN
         when(noteRepository.findById("1")).thenReturn(Optional.of(note1));
-        noteService.showUpdateNoteForm("1", new ConcurrentModel());
+        noteService.showUpdateNoteForm("1",1, new ConcurrentModel());
         //THEN
         verify(noteRepository).findById("1");
     }
@@ -105,13 +105,13 @@ public class NoteServiceTest {
     @DisplayName(" Test showUpdateForm test Error")
     public void showUpdateFormErrorTest() throws Exception {
         //GIVEN
-        Note note1  = new Note("1", 1, LocalDate.now(), "azerty");
+        Note  note1 = new Note("1", 1, LocalDate.now(), "azerty");
         Model model = null;
         //WHEN
         when(noteRepository.findById("1")).thenReturn(Optional.empty());
 
         //THEN
-        assertThrows(IllegalArgumentException.class, () -> noteService.showUpdateNoteForm("1",model));
+        assertThrows(IllegalArgumentException.class, () -> noteService.showUpdateNoteForm("1",1,model));
     }
 
     @Test

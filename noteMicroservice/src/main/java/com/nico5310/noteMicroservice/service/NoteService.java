@@ -16,10 +16,14 @@ public interface NoteService  {
 
     Note addNote(Note note);
 
-    Note showUpdateNoteForm(String id, Model model);
+//    Note showUpdateNoteForm(String id, Model model);
+
+    Note showUpdateNoteForm(String id, Integer patientId, Model model);
 
     Note updateNote(String id, Note note);
 
 
     void deleteNoteById(String id);
+
+    void deleteAllNotesByPatientId(Integer patientId);
 }

@@ -13,8 +13,8 @@ public interface NoteMSProxy {
     @GetMapping("/note/list/{patientId}")
     List<NoteBean> listNote(@PathVariable("patientId") Integer patientId);
 
-    @GetMapping("/note/getNoteById/{id}")
-    NoteBean getNoteById(@PathVariable ("id") String id);
+    @GetMapping("/note/getNoteById")
+    NoteBean getNoteById(@RequestParam String id);
 
 
     /// ADD
@@ -23,8 +23,8 @@ public interface NoteMSProxy {
 
 
     /// UPDATE
-    @GetMapping("/note/showUpdateForm/{id}")
-    NoteBean showUpdateNoteForm(@PathVariable("id") String id);
+    @GetMapping("/note/showUpdateForm/{id}/{patientId}")
+    NoteBean showUpdateNoteForm(@PathVariable("id") String id, @PathVariable ("patientId") Integer patientId);
 
     @PostMapping("/note/update/{id}")
     NoteBean updateNote(@PathVariable ("id") String id, @RequestBody NoteBean note);
@@ -32,6 +32,9 @@ public interface NoteMSProxy {
     /// DELETE
     @GetMapping("/note/delete/{id}")
     void deleteNote(@PathVariable ("id") String id);
+
+    @GetMapping("/note/delete/all/{patientId}")
+    void deleteAllNotesByPatientId(@PathVariable ("patientId") Integer patientId);
 
 
 }

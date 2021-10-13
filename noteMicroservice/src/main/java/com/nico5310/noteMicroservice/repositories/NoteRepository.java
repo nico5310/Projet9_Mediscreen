@@ -13,4 +13,5 @@ public interface NoteRepository extends MongoRepository<Note, String> {
     List<Note> findAllNotesByPatientId(Integer patientId);
 
 
+    void deleteAllNotesByPatientId(Integer patientId);
 }

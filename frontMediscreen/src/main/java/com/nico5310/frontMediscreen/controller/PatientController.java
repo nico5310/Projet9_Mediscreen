@@ -1,6 +1,7 @@
 package com.nico5310.frontMediscreen.controller;
 
 import com.nico5310.frontMediscreen.beans.PatientBean;
+import com.nico5310.frontMediscreen.proxies.NoteMSProxy;
 import com.nico5310.frontMediscreen.proxies.PatientMSProxy;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -24,6 +25,10 @@ public class PatientController {
 
     @Autowired
     private PatientMSProxy patientMSProxy;
+
+    @Autowired
+    private NoteMSProxy noteMSProxy;
+
 
     @GetMapping (value = "patient/list")
     public String listPatient(Model model) {
@@ -93,6 +98,7 @@ public class PatientController {
 
         logger.info("SUCCESS, patient is correctly delete");
         patientMSProxy.deletePatient(id);
+        noteMSProxy.deleteAllNotesByPatientId(id);
         return "redirect:/patient/list "; // controller url
     }
 

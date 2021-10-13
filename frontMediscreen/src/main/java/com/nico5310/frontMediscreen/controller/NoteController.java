@@ -46,7 +46,6 @@ public class NoteController {
         String assessment = assessmentMSProxy.getDiabetesLevelRisk(id);
         List<NoteBean> noteBeanList = noteMSProxy.listNote(id);
 
-
         model.addAttribute("patientName", patient.getFamily() + " " + patient.getGiven());
         model.addAttribute("patientAge", age);
         model.addAttribute("patientGenre", patient.getSex());
@@ -98,8 +97,8 @@ public class NoteController {
 
         logger.info("Show Update form page by Id" + id);
         note.setPatientId(patientId);
-
-        model.addAttribute("note", note);
+        noteMSProxy.showUpdateNoteForm(id, patientId);
+        model.addAttribute("note", noteMSProxy.getNoteById(id));
         return "note/updateNote"; // template html
     }
 

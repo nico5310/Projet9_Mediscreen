@@ -78,4 +78,11 @@ public class NoteController {
         noteService.deleteNoteById(id);
     }
 
+    @ApiOperation(value = "Delete all notes by patient")
+    @GetMapping("/note/delete/all/{patientId}")
+    public void deleteAllNotesByPatientId(@PathVariable ("patientId") Integer patientId) {
+
+        logger.info("SUCCESS, note is correctly delete to DB");
+        noteService.deleteAllNotesByPatientId(patientId);
+    }
 }

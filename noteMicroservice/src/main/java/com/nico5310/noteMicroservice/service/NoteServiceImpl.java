@@ -46,7 +46,7 @@ public class NoteServiceImpl implements NoteService{
     ///////  UPDATE METHOD
 
     @Override
-    public Note showUpdateNoteForm(String id, Model model) {
+    public Note showUpdateNoteForm(String id,Integer patientId, Model model) {
 
         logger.info("Show Update form complete");
         Note note = noteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ID:" + id));
@@ -69,6 +69,14 @@ public class NoteServiceImpl implements NoteService{
         logger.info("Delete note is complete");
         Note note = noteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ID:" + id));
         noteRepository.delete(note);
+    }
+
+    @Override
+    public void deleteAllNotesByPatientId(Integer patientId) {
+
+        logger.info("Delete note is complete");
+//        noteRepository.findAllNotesByPatientId(id);
+        noteRepository.deleteAllNotesByPatientId(patientId);
     }
 
 }
