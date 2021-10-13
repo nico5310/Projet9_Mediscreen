@@ -23,6 +23,48 @@ services:
         volumes:
             -   mysql_data:/data/db
 
+    assessment:
+        image: assessment
+        restart: always
+        ports:
+            - "8083:8083"
+        environment:
+            - PATIENT_URL=patient:8081
+            - NOTE_URL=note:8082
+        depends_on:
+            - patient
+            - note
+        container_name: assessment_microservice
+
+    frontMediscreen:
+            image: front_mediscreen
+            restart: always
+            ports:
+                - "8080:8080"
+            environment:
+                - PATIENT_URL=patient:8081
+                - NOTE_URL=note:8082
+                - ASSESSMENT_URL=assessment:8083
+            depends_on:
+                - patient
+                - note
+                - assessment
+            container_name: front_mediscreen
+
+    note:
+        image: note
+        restart: always
+        ports:
+            - "8082:8082"
+        container_name: note_microservice
+
+    patient:
+        image: patient
+        restart: always
+        ports:
+            - "8081:8081"
+        container_name: patient_microservice
+
 volumes:
     mongodb_data:
     mysql_data:
