@@ -92,7 +92,7 @@ public class PatientControllerTest {
         when(patientServiceImpl.updatePatient(any(Integer.class),any(Patient.class))).thenReturn(patient1);
 
         mockMvc.perform(post("/patient/update/1")
-                .content("{ \"family\":\"Doe1\", \"given\":\"John1\", \"dob\":\"2020-10-10\", \"sex\":\"F\", \"address\":\"1 address\", \"phone\":\"100-222-1000\" }")
+                .content("{ \"firstName\":\"Doe1\", \"lastName\":\"John1\", \"dob\":\"2020-10-10\", \"genre\":\"F\", \"address\":\"1 address\", \"phone\":\"100-222-1000\" }")
                 .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
     }
 

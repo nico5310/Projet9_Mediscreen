@@ -75,7 +75,6 @@ public class NoteServiceImpl implements NoteService{
     public void deleteAllNotesByPatientId(Integer patientId) {
 
         logger.info("Delete note is complete");
-//        noteRepository.findAllNotesByPatientId(id);
         noteRepository.deleteAllNotesByPatientId(patientId);
     }
 

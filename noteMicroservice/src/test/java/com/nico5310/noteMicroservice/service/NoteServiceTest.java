@@ -171,4 +171,15 @@ public class NoteServiceTest {
         assertThrows(IllegalArgumentException.class, () -> noteService.deleteNoteById("2"));
     }
 
+    @Test
+    @DisplayName(" Test delete all Notes By Patient Id ")
+    void deleteAllNotesByPatientIdTest() {
+        //GIVEN
+        doNothing().when(this.noteRepository).deleteAllNotesByPatientId((Integer) any());
+        //WHEN
+        noteServiceImpl.deleteAllNotesByPatientId(1);
+        //THEN
+        verify(noteRepository, times(1)).deleteAllNotesByPatientId(any(Integer.class));
+    }
+
 }

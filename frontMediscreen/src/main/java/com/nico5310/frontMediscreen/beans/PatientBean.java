@@ -21,13 +21,13 @@ public class PatientBean {
      * Firstname patient
      */
     @NotBlank(message = "First name is mandatory")
-    private String family;
+    private String firstName;
 
     /**
      * Lastname patient
      */
     @NotBlank(message = "Last name is mandatory")
-    private String given;
+    private String lastName;
 
     /**
      * Birthdate patient
@@ -39,8 +39,8 @@ public class PatientBean {
     /**
      * Sex / genre patient
      */
-    @NotNull(message = "Choice F or M sex")
-    private char sex;
+    @NotNull(message = "Choice F or M genre")
+    private char genre;
 
     /**
      * Address patient
@@ -54,15 +54,15 @@ public class PatientBean {
     @NotBlank(message = "Phone is mandatory")
     private String phone;
 
-    public PatientBean(Integer id, String family, String given, LocalDate dob, char sex, String address, String phone) {
+    public PatientBean(Integer id, String firstName, String lastName, LocalDate dob, char genre, String address, String phone) {
 
-        this.id      = id;
-        this.family  = family;
-        this.given   = given;
-        this.dob     = dob;
-        this.sex     = sex;
-        this.address = address;
-        this.phone   = phone;
+        this.id        = id;
+        this.firstName = firstName;
+        this.lastName  = lastName;
+        this.dob       = dob;
+        this.genre     = genre;
+        this.address   = address;
+        this.phone     = phone;
     }
 
     public PatientBean() {
@@ -79,24 +79,24 @@ public class PatientBean {
         this.id = id;
     }
 
-    public String getFamily() {
+    public String getFirstName() {
 
-        return family;
+        return firstName;
     }
 
-    public void setFamily(String family) {
+    public void setFirstName(String firstName) {
 
-        this.family = family;
+        this.firstName = firstName;
     }
 
-    public String getGiven() {
+    public String getLastName() {
 
-        return given;
+        return lastName;
     }
 
-    public void setGiven(String given) {
+    public void setLastName(String lastName) {
 
-        this.given = given;
+        this.lastName = lastName;
     }
 
     public LocalDate getDob() {
@@ -109,14 +109,14 @@ public class PatientBean {
         this.dob = dob;
     }
 
-    public char getSex() {
+    public char getGenre() {
 
-        return sex;
+        return genre;
     }
 
-    public void setSex(char sex) {
+    public void setGenre(char genre) {
 
-        this.sex = sex;
+        this.genre = genre;
     }
 
     public String getAddress() {

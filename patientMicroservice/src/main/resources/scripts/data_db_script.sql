@@ -1,4 +1,4 @@
-INSERT INTO patient(family, given, date_of_birth, sex, address, phone)
+INSERT INTO patient(first_name, last_name, date_of_birth, genre, address, phone)
 
 VALUES
     ('TestNone','Test1','1966-12-31','F' , '1 Brookside', '100-222-3333'),

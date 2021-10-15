@@ -115,8 +115,14 @@ public class NoteControllerTest {
         Note note1 = new Note("1", 1, LocalDate.now(), "azerty");
 
         mockMvc.perform(get("/note/delete/1")).andExpect(status().isOk());
-
     }
 
+    @Test
+    @DisplayName(" Test deleteAllNotes")
+    public void deleteAllNotesTest() throws Exception {
 
+//        Note note1 = new Note("1", 1, LocalDate.now(), "azerty");
+
+        mockMvc.perform(get("/note/delete/all/1")).andExpect(status().isOk());
+    }
 }

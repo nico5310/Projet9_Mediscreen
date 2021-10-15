@@ -1,14 +1,18 @@
 package com.nico5310.frontMediscreen.controller;
 
 import com.nico5310.frontMediscreen.beans.PatientBean;
+import com.nico5310.frontMediscreen.proxies.NoteMSProxy;
 import com.nico5310.frontMediscreen.proxies.PatientMSProxy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
@@ -20,9 +24,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@ContextConfiguration(classes = {PatientController.class})
+@ExtendWith(SpringExtension.class)
 @ImportAutoConfiguration(FeignAutoConfiguration.class)
 @WebMvcTest(PatientController.class)
 public class PatientControllerTest {
+
+    @MockBean
+    private NoteMSProxy noteMSProxy;
 
     @Autowired
     private PatientController patientController;
@@ -57,10 +66,10 @@ public class PatientControllerTest {
         when(patientMSProxy.addPatient(any(PatientBean.class))).thenReturn(patient1);
 
         mockMvc.perform(post("/patient/add/").sessionAttr("patient", patient1)
-                                             .param("family", "Doe1")
-                                             .param("given", "John1")
+                                             .param("firstName", "Doe1")
+                                             .param("lastName", "John1")
                                              .param("dob", String.valueOf(LocalDate.of(2000, 10, 10)))
-                                             .param("sex", "M")
+                                             .param("genre", "M")
                                              .param("address", "1 address")
                                              .param("phone", "100-200-4000"))
                .andExpect(status().is3xxRedirection())
@@ -76,10 +85,10 @@ public class PatientControllerTest {
         when(patientMSProxy.addPatient(any(PatientBean.class))).thenReturn(patient1);
 
         mockMvc.perform(post("/patient/add/").sessionAttr("patient", patient1)
-                                             .param("family", "Doe1")
-                                             .param("given", "John1")
+                                             .param("firstName", "Doe1")
+                                             .param("lastName", "John1")
                                              .param("dob", "error")
-                                             .param("sex", "M")
+                                             .param("genre", "M")
                                              .param("address", "1 address")
                                              .param("phone", "100-200-4000"))
                .andExpect(status().isOk())
@@ -106,10 +115,10 @@ public class PatientControllerTest {
         when(patientMSProxy.addPatient(any(PatientBean.class))).thenReturn(patient1);
 
         mockMvc.perform(post("/patient/update/1").sessionAttr("patient", patient1)
-                                                 .param("family", "Doe1")
-                                                 .param("given", "John1")
+                                                 .param("firstName", "Doe1")
+                                                 .param("lastName", "John1")
                                                  .param("dob", String.valueOf(LocalDate.of(2000, 10, 10)))
-                                                 .param("sex", "F")
+                                                 .param("genre", "F")
                                                  .param("address", "1 address")
                                                  .param("phone", "100-200-4000"))
                .andExpect(status().is3xxRedirection())
@@ -126,10 +135,10 @@ public class PatientControllerTest {
         when(patientMSProxy.addPatient(any(PatientBean.class))).thenReturn(patient1);
 
         mockMvc.perform(post("/patient/update/1").sessionAttr("patient", patient1)
-                                                 .param("family", "Doe1")
-                                                 .param("given", "John1")
+                                                 .param("firstName", "Doe1")
+                                                 .param("lastName", "John1")
                                                  .param("dob", "ERROR")
-                                                 .param("sex", "F")
+                                                 .param("genre", "F")
                                                  .param("address", "1 address")
                                                  .param("phone", "100-200-4000"))
                .andExpect(status().isOk())
@@ -138,10 +147,11 @@ public class PatientControllerTest {
     }
 
     @Test
-    @DisplayName(" Test delete patient")
+    @DisplayName(" Test delete patient with these notes")
     public void deletePatientTest() throws Exception {
 
-        mockMvc.perform(get("/patient/delete/1")).andExpect(status().is3xxRedirection());
+        mockMvc.perform(get("/patient/delete/1")).andExpect(status().isFound());
     }
+
 
 }

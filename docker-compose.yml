@@ -8,9 +8,9 @@ services:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: nico
         ports:
-            -   27017:27017
+            - 27017:27017
         volumes:
-            -   mongodb_data:/data/db
+            - mongodb_data:/data/db
 
     mysql:
         image: mysql
@@ -19,9 +19,9 @@ services:
             MYSQL_ROOT_USERNAME: root
             MYSQL_ROOT_PASSWORD: nico5310
         ports:
-            -   6033:3306
+            - 6033:3306
         volumes:
-            -   mysql_data:/data/db
+            - mysql_data:/data/db
 
     assessment:
         image: assessment
@@ -37,19 +37,19 @@ services:
         container_name: assessment_microservice
 
     frontMediscreen:
-            image: front_mediscreen
-            restart: always
-            ports:
-                - "8080:8080"
-            environment:
-                - PATIENT_URL=patient:8081
-                - NOTE_URL=note:8082
-                - ASSESSMENT_URL=assessment:8083
-            depends_on:
-                - patient
-                - note
-                - assessment
-            container_name: front_mediscreen
+        image: front_mediscreen
+        restart: always
+        ports:
+            - "8080:8080"
+        environment:
+            - PATIENT_URL=patient:8081
+            - NOTE_URL=note:8082
+            - ASSESSMENT_URL=assessment:8083
+        depends_on:
+            - patient
+            - note
+            - assessment
+        container_name: front_mediscreen
 
     note:
         image: note

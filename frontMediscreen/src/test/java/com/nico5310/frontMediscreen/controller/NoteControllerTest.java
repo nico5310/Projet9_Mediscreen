@@ -2,6 +2,7 @@ package com.nico5310.frontMediscreen.controller;
 
 import com.nico5310.frontMediscreen.beans.NoteBean;
 import com.nico5310.frontMediscreen.beans.PatientBean;
+import com.nico5310.frontMediscreen.proxies.AssessmentMSProxy;
 import com.nico5310.frontMediscreen.proxies.NoteMSProxy;
 import com.nico5310.frontMediscreen.proxies.PatientMSProxy;
 import org.junit.jupiter.api.DisplayName;
@@ -32,9 +33,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(NoteController.class)
 public class NoteControllerTest {
 
-    @MockBean
-    private PatientMSProxy patientMSProxy;
-
     @Autowired
     private NoteController noteController;
 
@@ -42,7 +40,13 @@ public class NoteControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
+    private PatientMSProxy patientMSProxy;
+
+    @MockBean
     private NoteMSProxy noteMsProxy;
+
+    @MockBean
+    private AssessmentMSProxy assessmentMSProxy;
 
     @Test
     @DisplayName(" Test get listNote")

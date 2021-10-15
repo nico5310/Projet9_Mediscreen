@@ -60,6 +60,7 @@ jacocoTestReport {
 			fileTree(dir: it, exclude: [
 					'**/beans/**',
 					'**/constants/**',
+					'**/model/**'
 			])
 		}))
 	}

@@ -46,9 +46,9 @@ public class NoteController {
         String assessment = assessmentMSProxy.getDiabetesLevelRisk(id);
         List<NoteBean> noteBeanList = noteMSProxy.listNote(id);
 
-        model.addAttribute("patientName", patient.getFamily() + " " + patient.getGiven());
+        model.addAttribute("patientName", patient.getFirstName() + " " + patient.getLastName());
         model.addAttribute("patientAge", age);
-        model.addAttribute("patientGenre", patient.getSex());
+        model.addAttribute("patientGenre", patient.getGenre());
         model.addAttribute("triggers", triggers );
         model.addAttribute("localDateTime", LocalDateTime.now());
         model.addAttribute ("assessment", assessment);
@@ -66,7 +66,7 @@ public class NoteController {
         note.setPatientId(patientId);
         note.setDate(LocalDate.now());
 
-        model.addAttribute("patientName", patient.getFamily() + " " + patient.getGiven());
+        model.addAttribute("patientName", patient.getFirstName() + " " + patient.getLastName());
         model.addAttribute("note", note);
         return "note/addNote.html";
 

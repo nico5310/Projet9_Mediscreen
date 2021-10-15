@@ -89,26 +89,26 @@ class PatientServiceTest {
     }
 
     @Test
-    @DisplayName(" Test updatePatient")
+    @DisplayName("Test updatePatient")
     public void updatePatientTest() throws Exception {
         //GIVEN
         Patient patient1 = new Patient();
         patient1.setId(1);
-        patient1.setFamily("Doe1");
-        patient1.setGiven("John");
+        patient1.setFirstName("Doe1");
+        patient1.setLastName("John");
         patient1.setDob(LocalDate.ofEpochDay(1L));
-        patient1.setSex('M');
-        patient1.setAddress("1 addrress");
+        patient1.setGenre('M');
+        patient1.setAddress("1 address");
         patient1.setPhone("100-200-4000");
         when(patientRepository.save(patient1)).thenReturn(patient1);
         //WHEN
         Patient patient2 = new Patient();
         patient2.setId(1);
-        patient2.setFamily("Doe1");
-        patient2.setGiven("John");
+        patient2.setFirstName("Doe1");
+        patient2.setLastName("John");
         patient2.setDob(LocalDate.ofEpochDay(1L));
-        patient2.setSex('F');
-        patient2.setAddress("1 addrress");
+        patient2.setGenre('F');
+        patient2.setAddress("1 address");
         patient2.setPhone("100-200-4000");
         //THEN
         patientServiceImpl.updatePatient(1, patient2);

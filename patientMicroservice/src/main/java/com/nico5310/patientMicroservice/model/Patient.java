@@ -24,16 +24,16 @@ public class Patient {
     /**
      * Firstname patient
      */
-    @Column(name = "family")
+    @Column(name = "first_name")
     @NotBlank(message = "First name is mandatory")
-    private String family;
+    private String firstName;
 
     /**
      * Lastname patient
      */
     @NotBlank(message = "Last name is mandatory")
-    @Column(name = "given")
-    private String given;
+    @Column(name = "last_name")
+    private String lastName;
 
     /**
      * Birthdate patient
@@ -46,8 +46,8 @@ public class Patient {
      * Sex / genre patient
      */
     @NotNull(message = "Sex cannot be blank")
-    @Column(name = "sex")
-    private char sex;
+    @Column(name = "genre")
+    private char genre;
 
     /**
      * Address patient
@@ -67,21 +67,21 @@ public class Patient {
     /**
      * patient public constructor
      * @param id of patient
-     * @param family of patient
-     * @param given of patient
+     * @param firstName of patient
+     * @param lastName of patient
      * @param dob of patient
-     * @param sex of patient
+     * @param genre of patient
      * @param address of patient
      * @param phone of patient
      */
-    public Patient(Integer id,String family, String given, LocalDate dob, char sex, String address, String phone) {
-        this.id      = id;
-        this.family  = family;
-        this.given   = given;
-        this.dob     = dob;
-        this.sex     = sex;
-        this.address = address;
-        this.phone   = phone;
+    public Patient(Integer id,String firstName, String lastName, LocalDate dob, char genre, String address, String phone) {
+        this.id        = id;
+        this.firstName = firstName;
+        this.lastName  = lastName;
+        this.dob       = dob;
+        this.genre     = genre;
+        this.address   = address;
+        this.phone     = phone;
     }
 
     /**
@@ -102,24 +102,24 @@ public class Patient {
         this.id = id;
     }
 
-    public String getFamily() {
+    public String getFirstName() {
 
-        return family;
+        return firstName;
     }
 
-    public void setFamily(String firstName) {
+    public void setFirstName(String firstName) {
 
-        this.family = firstName;
+        this.firstName = firstName;
     }
 
-    public String getGiven() {
+    public String getLastName() {
 
-        return given;
+        return lastName;
     }
 
-    public void setGiven(String lastName) {
+    public void setLastName(String lastName) {
 
-        this.given = lastName;
+        this.lastName = lastName;
     }
 
     public LocalDate getDob() {
@@ -132,14 +132,14 @@ public class Patient {
         this.dob = dob;
     }
 
-    public char getSex() {
+    public char getGenre() {
 
-        return sex;
+        return genre;
     }
 
-    public void setSex(char sex) {
+    public void setGenre(char sex) {
 
-        this.sex = sex;
+        this.genre = sex;
     }
 
     public String getAddress() {
@@ -165,6 +165,6 @@ public class Patient {
     @Override
     public String toString() {
 
-        return "patient{" + "id=" + id + ", family='" + family + '\'' + ", given='" + given + '\'' + ", dob=" + dob + ", sex='" + sex + '\'' + ", address='" + address + '\'' + ", phone='" + phone + '\'' + '}';
+        return "patient{" + "id=" + id + ", family='" + firstName + '\'' + ", given='" + lastName + '\'' + ", dob=" + dob + ", sex='" + genre + '\'' + ", address='" + address + '\'' + ", phone='" + phone + '\'' + '}';
     }
 }

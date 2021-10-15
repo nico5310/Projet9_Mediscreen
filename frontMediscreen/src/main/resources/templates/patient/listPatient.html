@@ -29,11 +29,11 @@
 				   style="margin-top: 10px">
 				<thead>
 					<tr>
-						<th>Id</th>
-						<th>Family</th>
-						<th>Given</th>
+<!--						<th>Id</th>-->
+						<th>First Name</th>
+						<th>Last Name</th>
 						<th>Date of birth</th>
-						<th>Sex</th>
+						<th>Genre</th>
 						<th>Address</th>
 						<th>Phone</th>
 						<th style="width:100px">Actions</th>
@@ -41,11 +41,11 @@
 				</thead>
 				<tbody>
 					<tr th:each="patient : ${patients}">
-						<td th:text="${patient.id}" style="width: 5%"></td>
-						<td th:text="${patient.family}" ></td>
-						<td th:text="${patient.given}" ></td>
+<!--						<td th:text="${patient.id}" style="width: 5%"></td>-->
+						<td th:text="${patient.firstName}" ></td>
+						<td th:text="${patient.lastName}" ></td>
 						<td th:text="${patient.dob }" ></td>
-						<td th:text="${patient.sex }" ></td>
+						<td th:text="${patient.genre }" ></td>
 						<td th:text="${patient.address }" ></td>
 						<td th:text="${patient.phone }" ></td>
 
