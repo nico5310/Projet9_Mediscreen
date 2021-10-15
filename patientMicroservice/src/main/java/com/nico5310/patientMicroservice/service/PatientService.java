@@ -1,6 +1,6 @@
-package com.nico5310.patient.service;
+package com.nico5310.patientMicroservice.service;
 
-import com.nico5310.patient.model.Patient;
+import com.nico5310.patientMicroservice.model.Patient;
 import org.springframework.ui.Model;
 
 import java.util.List;

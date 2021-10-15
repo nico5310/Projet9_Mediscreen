@@ -9,6 +9,7 @@ class NoteRepositoryApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+
 	@Test
 	public void main() {
 		NoteApplication.main(new String[] {});

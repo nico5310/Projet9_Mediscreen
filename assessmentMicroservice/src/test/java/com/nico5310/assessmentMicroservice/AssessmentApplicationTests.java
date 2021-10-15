@@ -10,4 +10,9 @@ class AssessmentApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	public void main() {
+		AssessmentApplication.main(new String[] {});
+	}
+
 }

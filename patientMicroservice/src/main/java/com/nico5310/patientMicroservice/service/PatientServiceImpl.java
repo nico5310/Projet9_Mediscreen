@@ -1,7 +1,7 @@
-package com.nico5310.patient.service;
+package com.nico5310.patientMicroservice.service;
 
-import com.nico5310.patient.model.Patient;
-import com.nico5310.patient.repositories.PatientRepository;
+import com.nico5310.patientMicroservice.model.Patient;
+import com.nico5310.patientMicroservice.repositories.PatientRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

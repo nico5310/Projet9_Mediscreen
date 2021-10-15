@@ -1,7 +1,7 @@
-package com.nico5310.patient.controller;
+package com.nico5310.patientMicroservice.controller;
 
-import com.nico5310.patient.model.Patient;
-import com.nico5310.patient.service.PatientService;
+import com.nico5310.patientMicroservice.model.Patient;
+import com.nico5310.patientMicroservice.service.PatientService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

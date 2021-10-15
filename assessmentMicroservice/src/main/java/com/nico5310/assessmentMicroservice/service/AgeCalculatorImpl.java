@@ -21,12 +21,11 @@ public class AgeCalculatorImpl implements AgeCalculator {
     @Override
     public int ageCalculate(LocalDate birthDate) {
 
-        if ((birthDate == null) && (birthDate.isAfter(LocalDate.now()))) {
-
+        int age = Period.between(birthDate, LocalDate.now()).getYears();
+        if (age <= 0) {
             logger.error("The age of patient is not valid");
             throw new IllegalArgumentException ("Person's birthdate isn't valid");
         }
-        int age = Period.between(birthDate, LocalDate.now()).getYears();
         logger.info("The age of patient is:" + age);
         return age;
 
@@ -38,12 +37,11 @@ public class AgeCalculatorImpl implements AgeCalculator {
 
         PatientBean patient = patientMSProxy.getById(id);
         LocalDate birthDate = patient.getDob();
-        if ((birthDate == null) && (birthDate.isAfter(LocalDate.now()))) {
-
+        int age = Period.between(birthDate, LocalDate.now()).getYears();
+        if (age <= 0) {
             logger.error("The age of patient is not valid");
             throw new IllegalArgumentException ("Person's birthdate isn't valid");
         }
-        int age = Period.between(birthDate, LocalDate.now()).getYears();
         logger.info("The age of patient is:" + age);
         return age;
 

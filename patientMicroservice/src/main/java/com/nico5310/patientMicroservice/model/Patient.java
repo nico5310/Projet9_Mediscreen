@@ -1,4 +1,4 @@
-package com.nico5310.patient.model;
+package com.nico5310.patientMicroservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;

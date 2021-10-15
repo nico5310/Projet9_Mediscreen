@@ -1,7 +1,7 @@
-package com.nico5310.patient.controller;
+package com.nico5310.patientMicroservice.controller;
 
-import com.nico5310.patient.model.Patient;
-import com.nico5310.patient.service.PatientServiceImpl;
+import com.nico5310.patientMicroservice.model.Patient;
+import com.nico5310.patientMicroservice.service.PatientServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

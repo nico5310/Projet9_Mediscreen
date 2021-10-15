@@ -1,4 +1,4 @@
-package com.nico5310.patient;
+package com.nico5310.patientMicroservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

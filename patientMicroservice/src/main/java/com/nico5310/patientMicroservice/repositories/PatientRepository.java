@@ -1,6 +1,6 @@
-package com.nico5310.patient.repositories;
+package com.nico5310.patientMicroservice.repositories;
 
-import com.nico5310.patient.model.Patient;
+import com.nico5310.patientMicroservice.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

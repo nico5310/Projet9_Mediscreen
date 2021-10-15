@@ -1,4 +1,4 @@
-package com.nico5310.patient;
+package com.nico5310.patientMicroservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

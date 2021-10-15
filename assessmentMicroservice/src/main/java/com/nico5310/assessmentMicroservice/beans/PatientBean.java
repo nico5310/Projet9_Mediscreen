@@ -1,6 +1,8 @@
 package com.nico5310.assessmentMicroservice.beans;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class PatientBean {
@@ -12,6 +14,7 @@ public class PatientBean {
 
     private String given;
 
+    @DateTimeFormat( pattern = "yyyy-MM-dd")
     private LocalDate dob;
 
     private char sex;
