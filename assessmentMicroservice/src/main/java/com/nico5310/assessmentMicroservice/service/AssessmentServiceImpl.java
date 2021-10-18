@@ -34,7 +34,7 @@ public class AssessmentServiceImpl implements AssessmentService {
         PatientBean patient = patientMSProxy.getById(id);
         int countTriggersInNotes = triggersCalculator.calculateTriggersInNotes(id);
         int age = ageCalculator.ageCalculate(patient.getDob());
-        char sex = patient.getSex();
+        char sex = patient.getGenre();
 
        if ((sex =='M' || sex =='F') && age > 30 && countTriggersInNotes > 1 && countTriggersInNotes < 6) {
             logger.info("The diabetes risk is " + Assessments.BORDERLINE);
