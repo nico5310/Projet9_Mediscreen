@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 
 import java.util.List;
 
-
 @Service
 public class PatientServiceImpl implements PatientService{
 
@@ -21,53 +20,82 @@ public class PatientServiceImpl implements PatientService{
 
 
     ///////    GET METHOD
+
+    /**
+     *
+     * @inheritDoc
+     */
     @Override
     public List<Patient> listPatient() {
-        logger.info("Get all patients from DB");
+        logger.info("Get all patients from Service");
         return patientRepository.findAll();
     }
 
+    /**
+     *
+     * @inheritDoc
+     */
     @Override
     public Patient getById(int id) {
-        logger.info("Get patient by id " + id);
+        logger.info("Get patient by id from Service " + id);
         return patientRepository.getById(id);
     }
 
     ////////     ADD METHOD
-
+    /**
+     *
+     * @inheritDoc
+     */
     @Override
     public Patient addPatient(Patient patient) {
 
-        logger.info("Saving new patient in DB");
+        logger.info("SUCCESS, add new patient" + patient + " is complete to DB from service");
+        if (patient.getAddress().isEmpty()) {
+            logger.info("address is empty");
+            patient.setAddress("No specified");
+        }
+        if (patient.getPhone().isEmpty()) {
+            logger.info("phone is empty");
+            patient.setPhone("No specified");
+        }
         return patientRepository.save(patient);
     }
 
     ///////  UPDATE METHOD
-
+    /**
+     *
+     * @inheritDoc
+     */
     @Override
     public Patient showUpdateForm(Integer id, Model model) {
 
-        logger.info("Show Update form complete");
+        logger.info("Show Update form page is charged from Service");
         Patient patient = patientRepository.getById(id);
         model.addAttribute("patient", patient);
         return patient;
     }
 
-
+    /**
+     *
+     * @inheritDoc
+     */
     @Override
     public Patient updatePatient(Integer id, Patient patient) {
 
-        logger.info("Updating patient is complete");
+        logger.info("SUCCESS, Update "+ patient + " is complete from service");
         return patientRepository.save(patient);
     }
 
     //////// DELETE METHOD
-
+    /**
+     *
+     * @inheritDoc
+     */
     @Override
     public void deletePatient(Integer id) {
 
-        logger.info("Delete patient is complete");
         Patient patient = patientRepository.findById(id).orElseThrow(() ->new IllegalArgumentException("Invalid ID:" + id));
+        logger.info("SUCCESS, patient and all her notes are correctly delete to DB from controller");
         patientRepository.delete(patient);
     }
 

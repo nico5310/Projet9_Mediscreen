@@ -22,8 +22,11 @@
 
 
 			<div class="mb-4">
-				<label for="note" class="form-label"></label>
-				<textarea class="form-control" id="note" th:field="*{recommendation}" rows="6"></textarea>
+				<label for="recommendation" class="form-label">Recommendation</label>
+				<textarea class="form-control" id="recommendation" th:field="*{recommendation}" rows="6"></textarea>
+				<p class="text-danger" th:if="${#fields.hasErrors('recommendation')}"
+				   th:errors="*{recommendation}">Error recommendation
+				</p>
 			</div>
 
 

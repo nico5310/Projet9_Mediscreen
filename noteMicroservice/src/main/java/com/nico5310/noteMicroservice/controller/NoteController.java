@@ -7,12 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-
+@Validated
 @RestController
 public class NoteController {
 
@@ -26,7 +27,7 @@ public class NoteController {
     @GetMapping("/note/list/{patientId}")
     public List<Note> listNote(@PathVariable ("patientId") Integer patientId) {
 
-        logger.info("Get list notes from DB for :" + patientId);
+        logger.info("Get all notes of patient by id : " + patientId + " from controller");
         return noteService.findByPatientId(patientId);
     }
 
@@ -34,7 +35,7 @@ public class NoteController {
     @GetMapping("/note/getNoteById")
     public Note getNoteById(@RequestParam String id) {
 
-        logger.info("Get note by Id from DB");
+        logger.info("Get note by id :" + id + " from controller");
         return noteService.getNoteById(id);
     }
 
@@ -42,9 +43,9 @@ public class NoteController {
     //////////  ADD REQUEST   ///////////////
     @ApiOperation(value = "Saving new note")
     @PostMapping("/note/add")
-    public Note addNote(@RequestBody Note note) {
+    public Note addNote(@Valid @RequestBody Note note) {
 
-        logger.info("SUCCESS, add new note" + note + " is complete to DB");
+        logger.info("SUCCESS, add new note is complete to DB from controller");
         return noteService.addNote(note);
     }
 
@@ -54,7 +55,7 @@ public class NoteController {
     @GetMapping("/note/showUpdateForm/{id}/{patientId}")
     public void showUpdateNoteForm(@PathVariable("id") String id,Integer patientId, Model model) {
 
-        logger.info("Show Update form page is charged");
+        logger.info("Show Update form complete is charged from controller");
         Note note = noteService.getNoteById(id);
         model.addAttribute("note", note);
     }
@@ -62,9 +63,9 @@ public class NoteController {
 
     @ApiOperation(value = "Update note")
     @PostMapping("/note/update/{id}")
-    public Note updateNote(@PathVariable ("id") String id, @RequestBody @Valid Note note) {
+    public Note updateNote(@PathVariable ("id") String id, @Valid @RequestBody Note note) {
 
-        logger.info("SUCCESS, Update note is complete");
+        logger.info("SUCCESS, Updating note is complete from controller");
         note.setId(id);
         return noteService.updateNote(id, note);
     }
@@ -74,7 +75,7 @@ public class NoteController {
     @GetMapping("/note/delete/{id}")
     public void deleteNote(@PathVariable ("id") String id) {
 
-        logger.info("SUCCESS, note is correctly delete to DB");
+        logger.info("SUCCESS, this note is correctly delete to DB from controller");
         noteService.deleteNoteById(id);
     }
 
@@ -82,7 +83,7 @@ public class NoteController {
     @GetMapping("/note/delete/all/{patientId}")
     public void deleteAllNotesByPatientId(@PathVariable ("patientId") Integer patientId) {
 
-        logger.info("SUCCESS, note is correctly delete to DB");
+        logger.info("SUCCESS, all notes for patient " + patientId + " is correctly delete to DB from controller");
         noteService.deleteAllNotesByPatientId(patientId);
     }
 }

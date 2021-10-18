@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-@DisplayName("Test PatientService ")
+@DisplayName("Test Patient Service ")
 @ContextConfiguration(classes = {PatientServiceImpl.class})
 @ExtendWith(SpringExtension.class)
 class PatientServiceTest {
@@ -74,6 +74,20 @@ class PatientServiceTest {
         patientService.addPatient(patient1);
         //THEN
         verify(patientRepository, times(1)).save(patient1);
+    }
+
+    @Test
+    @DisplayName(" Test addPatient with address and phone not specified")
+    public void addPatient_WithNoSpecifiedAddressAndPhoneTest() throws Exception {
+        //GIVEN
+        Patient patient1 = new Patient(1, "Doe1", "John1", LocalDate.of(2000, 10, 10), 'M', "", "");
+        //WHEN
+        when(patientRepository.save(any(Patient.class))).thenReturn(patient1);
+        patientService.addPatient(patient1);
+        //THEN
+        verify(patientRepository, times(1)).save(patient1);
+        assertEquals("No specified", patient1.getAddress());
+        assertEquals("No specified", patient1.getPhone());
     }
 
     @Test

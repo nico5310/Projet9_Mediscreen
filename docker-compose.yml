@@ -1,72 +1,34 @@
 version: '3.9'
 
 services:
-    mongodb:
-        image: mongo:latest
-        container_name: note_mediscreen_mongodb
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: root
-            MONGO_INITDB_ROOT_PASSWORD: nico
-        ports:
-            - 27017:27017
-        volumes:
-            - mongodb_data:/data/db
-
     mysql:
-        image: mysql
+        image: mysql:8
         container_name: patient_mediscreen_sql
+        restart: always
         environment:
             MYSQL_ROOT_USERNAME: root
             MYSQL_ROOT_PASSWORD: nico5310
         ports:
-            - 6033:3306
+            - "3306:3306"
         volumes:
             - mysql_data:/data/db
 
-    assessment:
-        image: assessment
+    mongodb:
+        image: mongo:latest
+        container_name: note_mediscreen_mongodb
         restart: always
-        ports:
-            - "8083:8083"
         environment:
-            - PATIENT_URL=patient:8081
-            - NOTE_URL=note:8082
-        depends_on:
-            - patient
-            - note
-        container_name: assessment_microservice
-
-    frontMediscreen:
-        image: front_mediscreen
-        restart: always
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: nico
         ports:
-            - "8080:8080"
-        environment:
-            - PATIENT_URL=patient:8081
-            - NOTE_URL=note:8082
-            - ASSESSMENT_URL=assessment:8083
-        depends_on:
-            - patient
-            - note
-            - assessment
-        container_name: front_mediscreen
+            - "27017:27017"
+        volumes:
+            - mongodb_data:/data/db
 
-    note:
-        image: note
-        restart: always
-        ports:
-            - "8082:8082"
-        container_name: note_microservice
-
-    patient:
-        image: patient
-        restart: always
-        ports:
-            - "8081:8081"
-        container_name: patient_microservice
 
 volumes:
-    mongodb_data:
     mysql_data:
+    mongodb_data:
+
 
 

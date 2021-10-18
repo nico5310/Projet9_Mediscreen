@@ -34,9 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class NoteControllerTest {
 
     @Autowired
-    private NoteController noteController;
-
-    @Autowired
     private MockMvc mockMvc;
 
     @MockBean
@@ -75,7 +72,7 @@ public class NoteControllerTest {
                                            .param("recommendation", "Test"))
                .andExpect(status().is3xxRedirection())
                .andExpect(model().hasNoErrors())
-               .andExpect(view().name("redirect:/patient/list"));
+               .andExpect(view().name("redirect:/note/list/1"));
     }
 
     @Test
@@ -92,9 +89,8 @@ public class NoteControllerTest {
                                            .param("recommendation", "Test"))
                .andExpect(status().isOk())
                .andExpect(model().hasErrors())
-               .andExpect(view().name("note/addNote.html"));
+               .andExpect(view().name("note/addNote"));
     }
-
 
     @Test
     @DisplayName(" Test showUpdateNoteForm")
@@ -105,9 +101,6 @@ public class NoteControllerTest {
         mockMvc.perform(get("/note/showUpdateForm/{id}/{patientId}", "1", 1)).andExpect(status().isOk());
 
     }
-
-
-
 
     @Test
     @DisplayName(" Test updateNote with valid param")
@@ -124,7 +117,7 @@ public class NoteControllerTest {
                                                 .param("recommendation", "test2"))
                .andExpect(status().is3xxRedirection())
                .andExpect(model().hasNoErrors())
-               .andExpect(view().name("redirect:/patient/list"));
+               .andExpect(view().name("redirect:/note/list/1"));
     }
 
     @Test

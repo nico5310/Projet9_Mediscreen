@@ -39,7 +39,8 @@ public class NoteController {
 
     @GetMapping(value = "/note/list/{id}")
     public String listNote(@PathVariable ("id") Integer id, Model model) {
-        logger.info("Get list notes from Proxy");
+
+        logger.info("Get all notes of patient by id : " + id + " from proxy");
         PatientBean     patient    = patientMSProxy.getById(id);
         int age = assessmentMSProxy.getAge(id);
         int triggers = assessmentMSProxy.getTriggers(id);
@@ -61,7 +62,7 @@ public class NoteController {
     @GetMapping("/note/addForm/{patientId}")
     public String addForm(@PathVariable ("patientId") Integer patientId, NoteBean note, Model model) {
 
-        logger.info("Show note add Form");
+        logger.info("Show note add Form is charged from proxy");
         PatientBean patient = patientMSProxy.getById(patientId);
         note.setPatientId(patientId);
         note.setDate(LocalDate.now());
@@ -74,19 +75,18 @@ public class NoteController {
 
     @ApiOperation(value = "Saving new note")
     @PostMapping("/note/add/{patientId}")
-    public String addNote(@PathVariable ("patientId") Integer patientId, @ModelAttribute("note") NoteBean note, BindingResult result, Model model) {
-
-        model.addAttribute("note", note);
+    public String addNote(@PathVariable ("patientId") Integer patientId, @Valid @ModelAttribute("note") NoteBean note, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
-            logger.error("ERROR, Add new note isn't possible");
-            return "note/addNote.html"; // template html
+            logger.error("ERROR, Add new note isn't possible from proxy");
+            return "note/addNote"; // template html
         }else {
-            logger.info("SUCCESS, add new note" + note + " is complete");
+            logger.info("SUCCESS, add new note is complete to DB from proxy");
+            model.addAttribute("note", note);
             note.setDate(LocalDate.now());
             note.setRecommendation(note.getRecommendation());
             noteMSProxy.addNote(note);
-            return "redirect:/patient/list";
+            return "redirect:/note/list/"+ patientId;
         }
     }
 
@@ -95,7 +95,7 @@ public class NoteController {
     @GetMapping("/note/showUpdateForm/{id}/{patientId}")
     public String showUpdateNoteForm(@PathVariable ("id") String id,@PathVariable ("patientId") Integer patientId, NoteBean note, Model model) {
 
-        logger.info("Show Update form page by Id" + id);
+        logger.info("Show Update form page by Id " + id + " from proxy");
         note.setPatientId(patientId);
         noteMSProxy.showUpdateNoteForm(id, patientId);
         model.addAttribute("note", noteMSProxy.getNoteById(id));
@@ -108,13 +108,12 @@ public class NoteController {
 
         if (result.hasErrors()) {
             logger.error("ERROR, Update note isn't valid");
-
             return "note/updateNote"; // template html
         }else {
             logger.info("SUCCESS, Update note is complete to proxy");
             note.setDate(LocalDate.now());
             noteMSProxy.updateNote(id, note);
-            return "redirect:/patient/list"; // template html
+            return "redirect:/note/list/" + patientId; // template html
         }
     }
     ///////   DELETE REQUEST
@@ -122,11 +121,9 @@ public class NoteController {
     @GetMapping("/note/delete/{id}")
     public String deleteNote(@PathVariable String id) {
 
-        logger.info("SUCCESS, note is correctly delete");
+        logger.info("SUCCESS, this note is correctly delete to DB from proxy");
         noteMSProxy.deleteNote(id);
         return "redirect:/patient/list"; // controller url
     }
-
-
 
 }

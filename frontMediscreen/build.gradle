@@ -7,7 +7,7 @@ plugins {
 }
 
 bootJar {
-	mainClassName('frontMediscreen.FrontMediscreenApplication')
+	mainClassName('com.nico5310.frontMediscreen.FrontMediscreenApplication')
 }
 
 repositories {

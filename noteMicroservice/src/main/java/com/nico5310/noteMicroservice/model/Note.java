@@ -7,39 +7,59 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Data
 @Document(collection = "note")
 public class Note {
 
+    /**
+     * Note id auto-generated
+     */
     @Id
     private String id;
 
+    /**
+     * Patient id who owns the note
+     */
     @Field(value = "patientId")
     private Integer patientId;
 
+    /**
+     * Creation date of the note
+     */
     @Field (value = "date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @DateTimeFormat( pattern = "yyyy-MM-dd")
     private LocalDate date;
 
+    /**
+     * Creation date of the note
+     */
     @Field (value = "recommendation")
-    @NotBlank(message = "Note is mandatory")
     private String recommendation;
 
+    /**
+     * note public constructeur
+     * @param id of note
+     * @param patientId of patient owns note
+     * @param date of creating note
+     * @param recommendation of doctor's
+     */
     public Note(String id, Integer patientId, LocalDate date, String recommendation) {
-
         this.id             = id;
         this.patientId      = patientId;
         this.date           = date;
         this.recommendation = recommendation;
     }
 
+    /**
+     * note public empty constructor
+     */
     public Note() {
 
     }
+
 
     public String getId() {
 

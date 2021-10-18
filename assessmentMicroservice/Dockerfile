@@ -7,4 +7,4 @@ COPY ${JAR_FILE} assessmentMicroservice.jar
 # Sets the main command for the image
 ENTRYPOINT ["java", "-jar", "/assessmentMicroservice.jar"]
 # Expose 8081 port number application uses
-EXPOSE 8081
+EXPOSE 8083

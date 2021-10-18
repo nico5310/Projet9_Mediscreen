@@ -13,7 +13,7 @@
 	<div class="row" style="margin-top: 20px">
 		<h2>Add New Note for:</h2>
 		<h2>
-			<span class="text-secondary fw-light" th:text="${patientName}"></span>
+			<span class="text-primary fw-light" th:text="${patientName}"></span>
 		</h2>
 	</div>
 
@@ -25,15 +25,18 @@
 
 
 			<div class="mb-4">
-				<label for="note" class="form-label"></label>
-				<textarea class="form-control" id="note" th:field="*{recommendation}" rows="6"></textarea>
+				<label for="recommendation" class="form-label">Recommendation</label>
+				<textarea class="form-control" id="recommendation" th:field="*{recommendation}" rows="6"></textarea>
+				<p class="text-danger" th:if="${#fields.hasErrors('recommendation')}"
+				   th:errors="*{recommendation}">Error recommendation
+				</p>
 			</div>
 			<div class="form-group" style="margin-top: 20px">
 				<div class="col-sm-12">
 					<input class="btn btn-primary" type="submit" value="Save a new Note">
 					<a class="btn btn-outline-danger" th:href="@{/note/list/{id}(id=${note.patientId})}">Cancel
-					</a> <!--
-					 controller url-->
+					</a> <!--controller url-->
+
 				</div>
 			</div>
 

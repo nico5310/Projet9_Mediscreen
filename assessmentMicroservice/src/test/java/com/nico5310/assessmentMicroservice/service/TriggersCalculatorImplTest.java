@@ -22,33 +22,21 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 class TriggersCalculatorImplTest {
 
-    @MockBean
-    private NoteMSProxy noteMSProxy;
-
     @Autowired
     private TriggersCalculatorImpl triggersCalculatorImpl;
 
-    @Test
-    void testCalculateTriggersInNotes() {
-
-        when(noteMSProxy.listNote(any(Integer.class))).thenReturn(new ArrayList<NoteBean>());
-
-        assertEquals(0,  triggersCalculatorImpl.calculateTriggersInNotes(1));
-
-        verify(noteMSProxy, times(1)).listNote((any(Integer.class)));
-    }
-
-
+    @MockBean
+    private NoteMSProxy noteMSProxy;
 
     @Test
+    @DisplayName(" Test calculate Triggers in note")
     void testCalculateTriggersInNotesTest() {
 
-        NoteBean note1 = new NoteBean("1", 1, LocalDate.now(), "Taille");
-        NoteBean note2 = new NoteBean("2", 1, LocalDate.now(), "Poids");
+        NoteBean note1 = new NoteBean("1", 1, LocalDate.now(), "Height");
+        NoteBean note2 = new NoteBean("2", 1, LocalDate.now(), "Weight");
         List<NoteBean> listNote = new ArrayList<NoteBean>();
         listNote.add(note1);
         listNote.add(note2);
-        List<String> triggersList = List.of("Hémoglobine A1C", "Microalbumine", "Taille", "Poids", "Fumeur", "Anormal", "Cholestérol", "Vertige", "Rechute", "Réaction", "Anticorps");
 
         when(noteMSProxy.listNote(any(Integer.class))).thenReturn(listNote);
 

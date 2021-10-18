@@ -30,17 +30,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(PatientController.class)
 public class PatientControllerTest {
 
-    @MockBean
-    private NoteMSProxy noteMSProxy;
-
-    @Autowired
-    private PatientController patientController;
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
     private PatientMSProxy patientMSProxy;
+
+    @MockBean
+    private NoteMSProxy noteMSProxy;
 
     @Test
     @DisplayName(" Test get listPatient")

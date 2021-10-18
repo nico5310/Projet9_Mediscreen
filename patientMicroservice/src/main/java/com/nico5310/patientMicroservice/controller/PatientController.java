@@ -27,7 +27,7 @@ public class PatientController {
     @RequestMapping("/patient/list")
     public List<Patient> listPatient() {
 
-        logger.info("Get list patient from DB");
+        logger.info("Get list patients from Controller");
         return patientService.listPatient();
     }
 
@@ -35,7 +35,7 @@ public class PatientController {
     @GetMapping("/patient/getById")
     public Patient getById(@RequestParam Integer id) {
 
-        logger.info("Get patient by Id from DB");
+        logger.info("Get patient by Id from DB from Controller " + id);
         return patientService.getById(id);
     }
 
@@ -44,7 +44,7 @@ public class PatientController {
     @PostMapping("/patient/add")
     public Patient addPatient(@RequestBody Patient patient) {
 
-        logger.info("SUCCESS, add new patient" + patient + " is complete to DB");
+        logger.info("SUCCESS, add new patient" + patient + " is complete to DB from controller");
         return patientService.addPatient(patient);
     }
 
@@ -53,7 +53,7 @@ public class PatientController {
     @GetMapping("/patient/showUpdateForm/{id}")
     public void showUpdateForm(@PathVariable("id") Integer id,Model model) {
 
-        logger.info("Show Update form page is charged");
+        logger.info("Show Update form page is charged from controller");
         Patient patient = patientService.getById(id);
         model.addAttribute("patient", patient);
     }
@@ -62,7 +62,7 @@ public class PatientController {
     @PostMapping("/patient/update/{id}")
     public Patient updatePatient(@PathVariable ("id") Integer id, @RequestBody @Valid Patient patient) {
 
-        logger.info("SUCCESS, Update patient is complete");
+        logger.info("SUCCESS, Update "+ patient+ " is complete from controller");
         return patientService.updatePatient(id, patient);
     }
 
@@ -71,7 +71,7 @@ public class PatientController {
     @GetMapping("/patient/delete/{id}")
     public void deletePatient(@PathVariable ("id") Integer id) {
 
-        logger.info("SUCCESS, patient is correctly delete to DB");
+        logger.info("SUCCESS, patient and all her notes are correctly delete to DB from controller");
         patientService.deletePatient(id);
     }
 

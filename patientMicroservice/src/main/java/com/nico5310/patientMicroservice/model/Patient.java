@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -25,13 +23,11 @@ public class Patient {
      * Firstname patient
      */
     @Column(name = "first_name")
-    @NotBlank(message = "First name is mandatory")
     private String firstName;
 
     /**
      * Lastname patient
      */
-    @NotBlank(message = "Last name is mandatory")
     @Column(name = "last_name")
     private String lastName;
 
@@ -45,21 +41,18 @@ public class Patient {
     /**
      * Sex / genre patient
      */
-    @NotNull(message = "Sex cannot be blank")
     @Column(name = "genre")
     private char genre;
 
     /**
      * Address patient
      */
-    @NotBlank(message = "address  is mandatory")
     @Column(name = "address")
     private String address;
 
     /**
      * phone number patient
      */
-    @NotBlank(message = "address  is mandatory")
     @Column(name = "phone")
     private String phone;
 

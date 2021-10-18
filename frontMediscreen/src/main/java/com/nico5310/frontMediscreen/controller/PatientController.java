@@ -32,7 +32,8 @@ public class PatientController {
 
     @GetMapping (value = "patient/list")
     public String listPatient(Model model) {
-        logger.info("Get list patient from Proxy");
+
+        logger.info("Get list patients from Proxy");
         model.addAttribute("localDateTime", LocalDateTime.now());
         model.addAttribute("patients", patientMSProxy.listPatient());
         return "patient/listPatient"; // template html
@@ -42,7 +43,8 @@ public class PatientController {
 
     @GetMapping("/patient/addForm")
     public String addForm(PatientBean patient, Model model) {
-        logger.info("Show patient add Form");
+
+        logger.info("Show add patient form age is charged from proxy");
         model.addAttribute("patient", patient);
         return "patient/addPatient"; // template html
 
@@ -57,7 +59,7 @@ public class PatientController {
             logger.error("ERROR, Add new patient isn't possible");
             return "patient/addPatient"; // template html
         }else {
-            logger.info("SUCCESS, add new patient" + patient + " is complete");
+            logger.info("SUCCESS, add new patient" + patient + " is complete to DB from proxy");
             patientMSProxy.addPatient(patient);
             return "redirect:/patient/list"; // controller url
         }
@@ -68,7 +70,7 @@ public class PatientController {
     @GetMapping("/patient/showUpdateForm/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, PatientBean patient, Model model) {
 
-        logger.info("Show Update form page by Id" + id);
+        logger.info("Show Update form page by Id is charged from proxy");
         patientMSProxy.showUpdateForm(id);
         model.addAttribute("patient", patientMSProxy.getById(id));
         return "patient/updatePatient"; // template html
@@ -84,7 +86,7 @@ public class PatientController {
             patient.setId(id);
             return "patient/updatePatient"; // template html
         }else {
-            logger.info("SUCCESS, Update patient is complete");
+            logger.info("SUCCESS, Update " + patient + " is complete from proxy");
             patientMSProxy.updatePatient(id, patient);
             return "redirect:/patient/list"; // template html
         }
@@ -96,7 +98,7 @@ public class PatientController {
     @GetMapping("/patient/delete/{id}")
     public String deletePatient(@PathVariable Integer id) {
 
-        logger.info("SUCCESS, patient is correctly delete");
+        logger.info("SUCCESS, patient and all her notes are correctly delete to DB from proxy");
         patientMSProxy.deletePatient(id);
         noteMSProxy.deleteAllNotesByPatientId(id);
         return "redirect:/patient/list "; // controller url

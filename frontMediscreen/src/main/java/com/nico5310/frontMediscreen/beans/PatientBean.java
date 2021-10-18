@@ -12,46 +12,25 @@ import java.time.LocalDate;
 
 public class PatientBean {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    /**
-     * Firstname patient
-     */
     @NotBlank(message = "First name is mandatory")
     private String firstName;
 
-    /**
-     * Lastname patient
-     */
     @NotBlank(message = "Last name is mandatory")
     private String lastName;
 
-    /**
-     * Birthdate patient
-     */
     @DateTimeFormat ( pattern = "yyyy-MM-dd")
     @NotNull(message = "Choice Birthdate")
     private LocalDate dob;
 
-    /**
-     * Sex / genre patient
-     */
     @NotNull(message = "Choice F or M genre")
     private char genre;
 
-    /**
-     * Address patient
-     */
-    @NotBlank(message = "address is mandatory")
     private String address;
 
-    /**
-     * phone number patient
-     */
-    @NotBlank(message = "Phone is mandatory")
     private String phone;
 
     public PatientBean(Integer id, String firstName, String lastName, LocalDate dob, char genre, String address, String phone) {
